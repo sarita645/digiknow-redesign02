@@ -1680,6 +1680,221 @@
         }
       }
 
+
+
+ /* ─────────────────────────────────────────────
+         CONTACT FORM SECTION
+      ───────────────────────────────────────────── */
+      .contact-section {
+        position: relative;
+        z-index: 1;
+        margin-top: var(--sp-12);
+
+        & .cf-card {
+          background: rgba(255 255 255 / .06);
+          border: 1px solid rgba(99 155 255 / .18);
+          border-radius: 20px;
+          overflow: hidden;
+          backdrop-filter: blur(8px);
+        }
+
+        /* header stripe */
+        & .cf-head {
+          text-align: center;
+          padding: var(--sp-6) var(--sp-4) var(--sp-4);
+          border-bottom: 1px solid rgba(99 155 255 / .14);
+          position: relative;
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--grad-btn);
+            border-radius: 2px;
+          }
+
+          & .cf-en {
+            font-family: var(--font-en);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #60A5FA;
+            margin-bottom: 8px;
+          }
+
+          & .cf-title {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 900;
+            color: #E8F2FF;
+            margin: 0;
+          }
+        }
+
+        /* form body */
+        & .cf-body {
+          padding: var(--sp-6) var(--sp-8);
+        }
+
+        /* field group */
+        & .cf-field {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+
+          & label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #B8D0F0;
+
+            & .req {
+              color: #60A5FA;
+              margin-left: 2px;
+            }
+          }
+
+          & .cf-hint {
+            font-size: 12px;
+            color: rgba(99 155 255 / .65);
+            margin-top: -2px;
+            margin-bottom: 2px;
+          }
+
+          & input,
+          & select,
+          & textarea {
+            width: 100%;
+            background: rgba(255 255 255 / .07);
+            border: 1.5px solid rgba(99 155 255 / .25);
+            border-radius: 8px;
+            padding: 11px 14px;
+            font-family: var(--font-zh);
+            font-size: 15px;
+            color: #E8F2FF;
+            transition: border-color .2s, background .2s, box-shadow .2s;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+
+            &::placeholder {
+              color: rgba(148 180 230 / .50);
+            }
+
+            &:focus {
+              border-color: rgba(99 155 255 / .70);
+              background: rgba(255 255 255 / .11);
+              box-shadow: 0 0 0 3px rgba(37 99 235 / .18);
+            }
+          }
+
+          /* select arrow */
+          & select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%2360A5FA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+            cursor: pointer;
+
+            & option {
+              background: #0C1A38;
+              color: #E8F2FF;
+            }
+          }
+
+          & textarea {
+            resize: vertical;
+            min-height: 112px;
+            line-height: 1.6;
+          }
+        }
+
+        /* privacy row */
+        & .cf-privacy {
+          font-size: 13px;
+          color: #7CAAD4;
+          line-height: 1.6;
+
+          & a {
+            color: #60A5FA;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+
+            &:hover { color: #93C5FD; }
+          }
+        }
+
+        /* submit button */
+        & .cf-submit {
+          display: flex;
+          justify-content: center;
+          padding-top: var(--sp-2);
+
+          & button[type="submit"] {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--grad-btn);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 48px;
+            font-family: var(--font-zh);
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            cursor: pointer;
+            box-shadow: 0 4px 24px rgba(20 70 232 / .40);
+            transition: background .2s, transform .15s, box-shadow .15s;
+            min-height: 52px;
+            min-width: 180px;
+            position: relative;
+            overflow: hidden;
+
+            &::after {
+              content: '';
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(
+                105deg,
+                transparent 35%,
+                rgba(255 255 255 / .18) 50%,
+                transparent 65%
+              );
+              transform: translateX(-100%);
+              transition: transform .45s ease;
+            }
+
+            &:hover {
+              background: linear-gradient(135deg, #0D35C8, #1446E8);
+              transform: translateY(-2px);
+              box-shadow: 0 8px 36px rgba(20 70 232 / .48);
+
+              &::after { transform: translateX(100%); }
+            }
+
+            &:active { transform: translateY(0); }
+          }
+        }
+
+        /* validation states */
+        & input:invalid:not(:placeholder-shown),
+        & select:invalid:not([value=""]) {
+          border-color: rgba(239 68 68 / .55);
+        }
+      }
+
+
+
+
+
+
+
+
       /* ─────────────────────────────────────────────
          MODAL
       ───────────────────────────────────────────── */
