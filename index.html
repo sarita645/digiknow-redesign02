@@ -1,0 +1,3585 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>就享知 DigiKnow｜打開品牌影響力，從專屬頻道開始</title>
+
+    <!-- Bootstrap 5.3 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+      integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+      crossorigin="anonymous"
+    >
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Barlow:wght@600;700;800;900&display=swap"
+      rel="stylesheet"
+    >
+
+    <style>
+      /* ─────────────────────────────────────────────
+         ROOT TOKENS  (8px grid, CSS variables)
+      ───────────────────────────────────────────── */
+      :root {
+        /* spacing */
+        --sp-1: 8px;
+        --sp-2: 16px;
+        --sp-3: 24px;
+        --sp-4: 32px;
+        --sp-5: 40px;
+        --sp-6: 48px;
+        --sp-8: 64px;
+        --sp-12: 96px;
+
+        /* max width */
+        --mw: 1320px;
+
+        /* light palette */
+        --bg:      #F0F7FF;
+        --bg2:     #E2EFFF;
+        --surface: #FFFFFF;
+        --border:  rgba(37 99 235 / .16);
+
+        /* text – WCAG AA */
+        --tx-hi:  #0F1F3D;
+        --tx-md:  #2C4A78;
+        --tx-lo:  #5070A0;
+        --tx-inv: #FFFFFF;
+
+        /* brand */
+        --b0: #0D35C8;
+        --b1: #1446E8;
+        --b2: #2563EB;
+        --b3: #3B82F6;
+        --b4: #BFDBFE;
+        --cyan: #0EA5E9;
+
+        /* gradients */
+        --grad-btn:  linear-gradient(135deg, #1446E8, #2563EB);
+        --grad-hero: linear-gradient(150deg, #DBEAFE 0%, #EFF6FF 50%, #E0F2FE 100%);
+        --grad-dark: linear-gradient(180deg, #060F22 0%, #0C1A38 60%, #060F22 100%);
+
+        /* elevation */
+        --sh-sm:  0 1px 4px   rgba(20 70 232 / .08);
+        --sh-md:  0 4px 24px  rgba(20 70 232 / .10);
+        --sh-lg:  0 12px 48px rgba(20 70 232 / .16);
+        --sh-btn: 0 4px 20px  rgba(20 70 232 / .32);
+
+        /* typography */
+        --font-en: 'Barlow', sans-serif;
+        --font-zh: 'Noto Sans TC', sans-serif;
+
+        /* radius */
+        --r: 12px;
+      }
+
+      /* ─────────────────────────────────────────────
+         BASE
+      ───────────────────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+
+      body {
+        font-family: var(--font-zh);
+        background: var(--bg);
+        color: var(--tx-hi);
+        overflow-x: hidden;
+        line-height: 1.6;
+      }
+
+      h1, h2, h3, h4 {
+        font-family: var(--font-zh);
+        line-height: 1.2;
+        color: var(--tx-hi);
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--tx-md);
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--b1);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      /* ─── max-width wrapper ─── */
+      .mw {
+        max-width: var(--mw);
+        margin-inline: auto;
+        padding-inline: var(--sp-4);
+      }
+
+      /* ─── skip link ─── */
+      .skip-link {
+        position: absolute;
+        top: -999px;
+        left: var(--sp-2);
+        background: var(--b1);
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-weight: 700;
+        z-index: 9999;
+
+        &:focus {
+          top: var(--sp-2);
+        }
+      }
+
+      /* ─────────────────────────────────────────────
+         SHARED HELPERS
+      ───────────────────────────────────────────── */
+
+      /* gradient text */
+      .gt {
+        background: var(--grad-btn);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* section label row */
+      .sec-lbl {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: var(--sp-1);
+
+        & .sl-bar {
+          width: 24px;
+          height: 3px;
+          background: var(--grad-btn);
+          border-radius: 2px;
+          flex-shrink: 0;
+        }
+
+        & .sl-en {
+          font-family: var(--font-en);
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: var(--b1);
+        }
+      }
+
+      /* tag chip */
+      .tag-chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 12px;
+        background: rgba(37 99 235 / .09);
+        border: 1px solid rgba(37 99 235 / .20);
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--b2);
+        white-space: nowrap;
+      }
+
+      /* ══════════════════════════════════════════════
+         BUTTON SYSTEM
+         1. .btn-cta        — 主要行動（藍色實心漸層）
+         2. .btn-ghost      — 次要行動（透明框線）
+         3. .btn-nav        — 導覽列小型按鈕
+         4. .btn-outline-inv — 深色背景上的白框線反底
+         5. .btn-text-arrow — 文字型 + 箭頭（卡片內連結）
+      ══════════════════════════════════════════════ */
+
+      /* ── 1. 主要 CTA ── */
+      .btn-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: var(--grad-btn);
+        color: #fff;
+        padding: 14px 28px;
+        border-radius: 10px;
+        font-family: var(--font-zh);
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: .3px;
+        border: none;
+        cursor: pointer;
+        box-shadow: var(--sh-btn);
+        transition: background .2s, transform .15s, box-shadow .15s;
+        min-height: 48px;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+
+        /* shimmer sweep on hover */
+        &::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            105deg,
+            transparent 35%,
+            rgba(255 255 255 / .18) 50%,
+            transparent 65%
+          );
+          transform: translateX(-100%);
+          transition: transform .45s ease;
+        }
+
+        &:hover {
+          background: linear-gradient(135deg, #0D35C8, #1446E8);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 32px rgba(20 70 232 / .38);
+          color: #fff;
+          text-decoration: none;
+
+          &::after { transform: translateX(100%); }
+        }
+
+        &:active {
+          transform: translateY(0);
+          box-shadow: var(--sh-btn);
+        }
+
+        /* arrow nudge for buttons that end with → */
+        & .arr {
+          display: inline-block;
+          transition: transform .2s;
+        }
+
+        &:hover .arr { transform: translateX(3px); }
+      }
+
+      /* ── 2. 次要 Ghost ── */
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: rgba(37 99 235 / .06);
+        color: var(--b1);
+        padding: 13px 26px;
+        border-radius: 10px;
+        font-family: var(--font-zh);
+        font-weight: 600;
+        font-size: 16px;
+        border: 1.5px solid rgba(37 99 235 / .35);
+        cursor: pointer;
+        transition: background .2s, border-color .2s, transform .15s;
+        min-height: 48px;
+        text-decoration: none;
+
+        &:hover {
+          background: rgba(37 99 235 / .12);
+          border-color: var(--b1);
+          color: var(--b1);
+          transform: translateY(-2px);
+          text-decoration: none;
+        }
+
+        &:active { transform: translateY(0); }
+      }
+
+      /* ── 3. 導覽列小型按鈕 ── */
+      .btn-nav {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: var(--grad-btn);
+        color: #fff;
+        padding: 8px 18px;
+        border-radius: 8px;
+        font-family: var(--font-zh);
+        font-weight: 700;
+        font-size: 14px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(20 70 232 / .28);
+        transition: background .2s, transform .15s, box-shadow .15s;
+        min-height: 38px;
+        text-decoration: none;
+        white-space: nowrap;
+
+        &:hover {
+          background: linear-gradient(135deg, #0D35C8, #1446E8);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 16px rgba(20 70 232 / .36);
+          color: #fff;
+          text-decoration: none;
+        }
+
+        &:active { transform: translateY(0); }
+      }
+
+      /* ── 4. 深色背景白底反色 CTA（CTA Banner 專用） ── */
+      .btn-inv {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #fff;
+        color: var(--b1);
+        padding: 14px 32px;
+        border-radius: 10px;
+        font-family: var(--font-zh);
+        font-weight: 700;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 24px rgba(0 0 0 / .20);
+        transition: background .2s, transform .15s, box-shadow .15s, color .2s;
+        min-height: 48px;
+        text-decoration: none;
+        white-space: nowrap;
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            105deg,
+            transparent 35%,
+            rgba(20 70 232 / .08) 50%,
+            transparent 65%
+          );
+          transform: translateX(-100%);
+          transition: transform .45s ease;
+        }
+
+        &:hover {
+          background: #EEF4FF;
+          color: var(--b0);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 36px rgba(0 0 0 / .26);
+          text-decoration: none;
+
+          &::after { transform: translateX(100%); }
+        }
+
+        &:active { transform: translateY(0); }
+      }
+
+      /* ── 5. 文字型箭頭連結（案例卡夥伴分享等） ── */
+      .btn-text-arrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: none;
+        border: none;
+        padding: 6px 0;
+        font-family: var(--font-zh);
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--b1);
+        cursor: pointer;
+        min-height: 44px;
+        text-decoration: none;
+        transition: color .2s, gap .2s;
+
+        & .bta-icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 22px;
+          height: 22px;
+          background: rgba(37 99 235 / .10);
+          border-radius: 50%;
+          flex-shrink: 0;
+          transition: background .2s, transform .2s;
+
+          & svg { stroke: var(--b1); transition: stroke .2s; }
+        }
+
+        &:hover {
+          color: var(--b0);
+          gap: 8px;
+          text-decoration: none;
+
+          & .bta-icon {
+            background: var(--b1);
+            transform: translateX(2px);
+
+            & svg { stroke: #fff; }
+          }
+        }
+      }
+
+      /* ── 服務 Detail 面板內 CTA（稍小一點，配合面板空間） ── */
+      .btn-detail-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: var(--grad-btn);
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-family: var(--font-zh);
+        font-weight: 700;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+        box-shadow: var(--sh-btn);
+        transition: background .2s, transform .15s, box-shadow .15s;
+        min-height: 44px;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            105deg,
+            transparent 35%,
+            rgba(255 255 255 / .16) 50%,
+            transparent 65%
+          );
+          transform: translateX(-100%);
+          transition: transform .4s ease;
+        }
+
+        &:hover {
+          background: linear-gradient(135deg, #0D35C8, #1446E8);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 24px rgba(20 70 232 / .36);
+          color: #fff;
+          text-decoration: none;
+
+          &::before { transform: translateX(100%); }
+        }
+
+        &:active { transform: translateY(0); }
+      }
+
+      /* ─── section padding ─── */
+      .sec-pad {
+        padding-block: var(--sp-12);
+      }
+
+      /* ─────────────────────────────────────────────
+         NAV
+      ───────────────────────────────────────────── */
+      .site-nav {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 500;
+        height: 64px;
+        background: rgba(240 247 255 / .90);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(37 99 235 / .12);
+        box-shadow: 0 2px 16px rgba(20 70 232 / .06);
+
+        & .nav-inner {
+          max-width: var(--mw);
+          margin-inline: auto;
+          padding-inline: var(--sp-4);
+          height: 64px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: var(--sp-3);
+        }
+
+        & .nav-brand {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          text-decoration: none;
+
+          & .b-main {
+            font-family: var(--font-en);
+            font-weight: 800;
+            font-size: 17px;
+            color: var(--b1);
+            letter-spacing: 1px;
+          }
+
+          & .b-sep {
+            width: 1px;
+            height: 18px;
+            background: rgba(37 99 235 / .30);
+          }
+
+          & .b-zh {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--tx-hi);
+          }
+        }
+
+        & .nav-links {
+          display: flex;
+          gap: var(--sp-4);
+          list-style: none;
+          margin: 0;
+          padding: 0;
+
+          & a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--tx-lo);
+            text-decoration: none;
+            padding: 4px 0;
+            position: relative;
+            transition: color .2s;
+
+            &::after {
+              content: '';
+              position: absolute;
+              bottom: -2px;
+              left: 0;
+              right: 0;
+              height: 2px;
+              background: var(--b1);
+              transform: scaleX(0);
+              transition: transform .2s;
+              border-radius: 1px;
+            }
+
+            &:hover {
+              color: var(--b1);
+
+              &::after {
+                transform: scaleX(1);
+              }
+            }
+          }
+        }
+      }
+
+      /* ─────────────────────────────────────────────
+         HERO
+      ───────────────────────────────────────────── */
+      .hero {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        padding-top: 64px;
+        overflow: hidden;
+        background: var(--grad-hero);
+
+        & .hero-dots {
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(rgba(37 99 235 / .11) 1.5px, transparent 1.5px);
+          background-size: 32px 32px;
+          opacity: .65;
+          pointer-events: none;
+        }
+
+        /* blobs */
+        & .h-blob {
+          position: absolute;
+          border-radius: 50%;
+          filter: blur(72px);
+          pointer-events: none;
+
+          &.hb1 {
+            width: 560px;
+            height: 560px;
+            background: radial-gradient(circle, hsla(217, 91%, 60%, 0.527), transparent 70%);
+            right: -80px;
+            top: -80px;
+            animation: bfloat 10s ease-in-out infinite;
+          }
+
+          &.hb2 {
+            width: 340px;
+            height: 340px;
+            background: radial-gradient(circle, rgba(14, 164, 233, 0.597), transparent 70%);
+            left: -40px;
+            bottom: 80px;
+            animation: bfloat 8s ease-in-out infinite reverse;
+          }
+
+          &.hb3 {
+            width: 240px;
+            height: 240px;
+                        background: radial-gradient(circle, rgb(255 233 76 / 72%), transparent 70%);
+            left: 38%;
+            top: 20%;
+            animation: bfloat 12s ease-in-out infinite 2s;
+          }
+
+
+
+
+          &.hb4 {
+            width: 600px;
+            height: 600px;
+                        background: radial-gradient(circle, hsla(217, 91%, 60%, 0.527), transparent 70%);
+            left: 38%;
+            top: 20%;
+            animation: bfloat 12s ease-in-out infinite 2s;
+          }
+
+
+
+
+
+
+
+
+
+
+        }
+
+        /* ── hero image block ── */
+        & .hero-visual {
+          position: absolute;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          width: 46%;
+          overflow: hidden;
+
+          & .hv-carousel {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+
+            /* slides track */
+            & .hv-slides {
+              display: flex;
+              width: 100%;
+              height: 100%;
+            }
+
+            & .hv-slide {
+              position: absolute;
+              inset: 0;
+              opacity: 0;
+              transition: opacity .9s ease;
+
+              & img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center top;
+                display: block;
+              }
+
+              &.is-active {
+                opacity: 1;
+                z-index: 1;
+              }
+            }
+
+            /* left fade blend into hero bg */
+            &::before {
+              content: '';
+              position: absolute;
+              inset: 0;
+              z-index: 2;
+              pointer-events: none;
+            }
+
+            /* dot indicators */
+            & .hv-dots {
+              position: absolute;
+              bottom: 24px;
+              left: 50%;
+              transform: translateX(-50%);
+              display: flex;
+              gap: 8px;
+              z-index: 4;
+
+              & .hv-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: rgba(255 255 255 / .45);
+                border: none;
+                cursor: pointer;
+                padding: 0;
+                transition: background .3s, transform .3s;
+
+                &.is-active {
+                  background: #fff;
+                  transform: scale(1.3);
+                }
+              }
+            }
+
+            /* progress bar */
+            & .hv-progress {
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              height: 3px;
+              width: 0%;
+              background: var(--grad-btn);
+              z-index: 4;
+              transition: width linear;
+            }
+          }
+
+          /* blue accent stripe */
+          & .hv-stripe {
+            position: absolute;
+            top: var(--sp-8);
+            left: -4px;
+            width: 6px;
+            height: 120px;
+            background: var(--grad-btn);
+            border-radius: 0 4px 4px 0;
+            z-index: 2;
+          }
+
+          /* floating stat cards */
+          & .h-float {
+            position: absolute;
+            background: rgba(255 255 255 / .92);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(37 99 235 / .22);
+            border-radius: 12px;
+            padding: 12px 18px;
+            box-shadow: var(--sh-md);
+            animation: imgfloat 5s ease-in-out infinite;
+            z-index: 3;
+
+            & .fn {
+              font-family: var(--font-en);
+              font-size: 22px;
+              font-weight: 900;
+              background: var(--grad-btn);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+              line-height: 1;
+            }
+
+            & .fl {
+              font-size: 12px;
+              color: var(--tx-lo);
+              margin-top: 3px;
+            }
+
+            &.hf1 { top: 18%; left: 6%;   animation-delay: 0s;   }
+            &.hf2 { bottom: 22%; right: 6%; animation-delay: 1.3s; }
+            &.hf3 { top: 52%; left: 4%;   animation-delay: 2s;   }
+          }
+        }
+
+        /* ── content ── */
+        & .hero-content {
+          position: relative;
+          z-index: 10;
+          max-width: 560px;
+        }
+
+        & .hero-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(37 99 235 / .10);
+          border: 1.5px solid rgba(37 99 235 / .24);
+          border-radius: 24px;
+          padding: 6px 16px;
+          margin-bottom: var(--sp-3);
+
+          & .hb-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--b1);
+            border-radius: 50%;
+            animation: bpulse 2s ease-in-out infinite;
+          }
+
+          & span {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--b1);
+          }
+        }
+
+        & .hero-logo-row {
+          display: flex;
+          align-items: baseline;
+          gap: 10px;
+          margin-bottom: var(--sp-2);
+          width: 200px;
+
+          & .hl-en {
+            font-family: var(--font-en);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--b2);
+          }
+
+          & .hl-zh {
+            font-size: 44px;
+            font-weight: 900;
+            background: var(--grad-btn);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+          }
+        }
+
+        & .hero-h1 {
+          font-size: clamp(30px, 4vw, 50px);
+          font-weight: 900;
+          line-height: 1.22;
+          color: var(--tx-hi);
+          margin-bottom: var(--sp-2);
+
+          & em {
+            font-style: normal;
+            color: var(--b1);
+          }
+        }
+
+        & .hero-sub {
+          font-family: var(--font-en);
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: var(--tx-lo);
+          margin-bottom: var(--sp-2);
+        }
+
+        & .hero-desc {
+          font-size: 17px;
+          color: var(--tx-md);
+          line-height: 1.7;
+          margin-bottom: var(--sp-4);
+
+          & strong {
+            color: var(--b1);
+            font-weight: 700;
+          }
+        }
+
+        & .hero-chips {
+          display: flex;
+          gap: var(--sp-2);
+          flex-wrap: wrap;
+          margin-bottom: var(--sp-4);
+
+          & .chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 1px solid rgba(37 99 235 / .22);
+            border-radius: 8px;
+            padding: 8px 14px;
+            box-shadow: var(--sh-sm);
+
+            & svg { stroke: var(--b1); }
+
+            & span {
+              font-size: 14px;
+              font-weight: 600;
+              color: var(--tx-md);
+            }
+          }
+        }
+
+        /* scroll hint */
+        & .scroll-hint {
+          position: absolute;
+          bottom: 32px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 6px;
+          opacity: 0;
+          animation: fadein 1s 2s forwards;
+          pointer-events: none;
+
+          & .sh-line {
+            width: 1.5px;
+            height: 32px;
+            background: linear-gradient(180deg, var(--b2), transparent);
+            animation: spulse 2s ease-in-out infinite;
+          }
+
+          & .sh-txt {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--tx-lo);
+          }
+        }
+      }
+
+      /* ─────────────────────────────────────────────
+         CASES
+      ───────────────────────────────────────────── */
+      .cases-section {
+        background: linear-gradient(180deg, #EEF4FF, #E2EFFF);
+
+        & .case-card-featured {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: var(--r);
+          box-shadow: var(--sh-md);
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          transition: box-shadow .25s, transform .25s, border-color .25s;
+
+          &:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--sh-lg);
+            border-color: rgba(37 99 235 / .36);
+          }
+
+          & .ccf-topbar {
+            height: 3px;
+            background: var(--grad-btn);
+          }
+
+          & .ccf-img {
+            height: 200px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #DBEAFE, #EFF6FF);
+            position: relative;
+
+            & img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              opacity: .7;
+              transition: opacity .3s;
+            }
+
+            &::after {
+              content: '';
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(0deg, rgba(255 255 255 / .8) 0%, transparent 60%);
+            }
+          }
+
+          &:hover .ccf-img img { opacity: .9; }
+
+          & .ccf-body {
+            padding: var(--sp-3);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+          }
+
+          & .ccf-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: var(--sp-2);
+          }
+
+          & .ccf-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--tx-hi);
+            margin-bottom: 4px;
+          }
+
+          & .ccf-ch {
+            font-size: 13px;
+            color: var(--tx-lo);
+            margin-bottom: var(--sp-2);
+          }
+
+          & .ccf-quote {
+            font-size: 16px;
+            color: var(--tx-md);
+            line-height: 1.7;
+            flex: 1;
+          }
+        }
+
+        /* secondary small cards */
+        & .case-card-sm {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: var(--r);
+          box-shadow: var(--sh-sm);
+          overflow: hidden;
+          cursor: pointer;
+          transition: box-shadow .2s, transform .2s, border-color .2s;
+
+          &:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--sh-md);
+            border-color: rgba(37 99 235 / .36);
+          }
+
+          & .csm-img {
+            height: 120px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #DBEAFE, #E0F2FE);
+
+            & img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              opacity: .65;
+              transition: opacity .25s;
+            }
+          }
+
+          &:hover .csm-img img { opacity: .9; }
+
+          & .csm-body {
+            padding: var(--sp-2);
+          }
+
+          & .csm-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--tx-hi);
+            margin-bottom: 6px;
+          }
+
+          & .csm-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: var(--sp-1);
+
+            & .tag-chip { font-size: 11px; padding: 3px 8px; }
+          }
+        }
+
+        /* logo scroll */
+        & .logos-scroll {
+          margin-top: var(--sp-8);
+          border-top: 1px solid rgba(37 99 235 / .12);
+          border-bottom: 1px solid rgba(37 99 235 / .12);
+          padding-block: 24px;
+          overflow: hidden;
+          position: relative;
+
+          &::before,
+          &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 72px;
+            z-index: 2;
+          }
+
+          &::before { left: 0;  background: linear-gradient(90deg,  #E2EFFF, transparent); }
+          &::after  { right: 0; background: linear-gradient(-90deg, #E2EFFF, transparent); }
+
+          & .logos-track {
+            display: flex;
+            gap: 16px;
+            animation: logtick 24s linear infinite;
+            width: max-content;
+          }
+
+          & .logo-pill {
+            background: var(--surface);
+            border: 1px solid rgba(37 99 235 / .18);
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--tx-lo);
+            white-space: nowrap;
+            box-shadow: var(--sh-sm);
+          }
+        }
+      }
+
+      /* ─────────────────────────────────────────────
+         SERVICES
+      ───────────────────────────────────────────── */
+      .services-section {
+        background: linear-gradient(180deg, #E2EFFF 0%, #C8D9F8 40%, #1340D0 100%);
+
+        /* tier-1 tab row: 線上 / 線下 */
+        & .srv-t1-tabs {
+          display: flex;
+          background: rgba(255 255 255 / .68);
+          border: 1.5px solid rgba(37 99 235 / .28);
+          border-radius: 14px;
+          padding: 6px;
+          width: fit-content;
+          margin-bottom: var(--sp-6);
+          backdrop-filter: blur(8px);
+
+          & .srv-t1-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 10px;
+            background: transparent;
+            color: var(--tx-md);
+            font-size: 15px;
+            font-family: var(--font-zh);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .25s;
+            min-height: 48px;
+
+            & svg { stroke: var(--b2); transition: stroke .25s; }
+
+            &[aria-selected="true"] {
+              background: var(--grad-btn);
+              color: #fff;
+              box-shadow: 0 4px 20px rgba(20 70 232 / .30);
+
+              & svg { stroke: #fff; }
+            }
+          }
+        }
+
+        /* tier-2: 4 visual selector cards */
+        & .srv-t2-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: var(--sp-2);
+          margin-bottom: var(--sp-6);
+        }
+
+        & .srv-t2-card {
+          background: rgba(255 255 255 / .85);
+          border: 2px solid transparent;
+          border-radius: var(--r);
+          padding: var(--sp-3);
+          cursor: pointer;
+          transition: all .25s;
+          position: relative;
+          box-shadow: var(--sh-sm);
+
+          &:hover {
+            background: var(--surface);
+            border-color: rgba(37 99 235 / .35);
+            box-shadow: var(--sh-md);
+            transform: translateY(-2px);
+          }
+
+          &[aria-selected="true"] {
+            background: var(--surface);
+            border-color: var(--b1);
+            box-shadow: 0 0 0 3px rgba(37 99 235 / .16), var(--sh-md);
+
+            & .t2-label {
+              color: var(--b1);
+              font-weight: 700;
+            }
+
+            & .t2-tick { display: flex; }
+          }
+
+          &.is-dim {
+            opacity: .45;
+            cursor: pointer;
+            transition: all .25s;
+
+            &:hover {
+              opacity: .80;
+              border-color: rgba(37 99 235 / .28);
+              transform: translateY(-2px);
+              box-shadow: var(--sh-sm);
+            }
+          }
+
+          & .t2-tick {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background: var(--b1);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+
+            & svg { stroke: #fff; }
+          }
+
+          & .t2-icon-wrap {
+            width: 44px;
+            height: 44px;
+            background: rgba(37 99 235 / .10);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+
+            & svg { stroke: var(--b1); }
+          }
+
+          & .t2-mode {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--b3);
+            margin-bottom: 4px;
+          }
+
+          & .t2-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--tx-hi);
+            margin-bottom: 6px;
+            transition: color .2s;
+          }
+
+          & .t2-short {
+            font-size: 13px;
+            color: var(--tx-lo);
+            line-height: 1.55;
+          }
+        }
+
+        /* detail panel */
+        & .srv-detail {
+          display: none;
+
+          &.active {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: var(--sp-8);
+            align-items: start;
+            background: rgba(255 255 255 / .92);
+            border-radius: var(--r);
+            padding: var(--sp-6);
+            box-shadow: var(--sh-lg);
+            border: 1px solid rgba(37 99 235 / .20);
+            animation: fadepanel .3s ease;
+          }
+
+          & .sdl-eyebrow {
+            font-family: var(--font-en);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--b1);
+            margin-bottom: 12px;
+          }
+
+          & .sdl-title {
+            font-size: clamp(20px, 2.5vw, 26px);
+            font-weight: 800;
+            color: var(--tx-hi);
+            line-height: 1.35;
+            margin-bottom: 16px;
+          }
+
+          & .sdl-desc {
+            font-size: 16px;
+            color: var(--tx-md);
+            line-height: 1.7;
+            margin-bottom: var(--sp-3);
+          }
+
+          & .sdl-flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            margin-bottom: var(--sp-3);
+
+            & .fp {
+              padding: 5px 12px;
+              border-radius: 20px;
+              font-size: 12px;
+              font-weight: 500;
+              background: rgba(37 99 235 / .08);
+              border: 1px solid rgba(37 99 235 / .20);
+              color: var(--b1);
+            }
+
+            & .fp-hi {
+              background: var(--b1);
+              border-color: var(--b1);
+              color: #fff;
+            }
+
+            & .fa { color: var(--tx-lo); font-size: 12px; }
+          }
+
+          & .sdl-feat-list {
+            margin-bottom: var(--sp-3);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            & li {
+              font-size: 15px;
+              color: var(--tx-md);
+              list-style: none;
+              display: flex;
+              align-items: flex-start;
+              gap: 10px;
+
+              &::before {
+                content: '';
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--b1);
+                flex-shrink: 0;
+                margin-top: 7px;
+              }
+            }
+          }
+
+          /* 2-col item grid */
+          & .sdl-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-2);
+
+            & .sdl-item {
+              background: rgba(255 255 255 / .95);
+              border: 1px solid rgba(37 99 235 / .16);
+              border-radius: 10px;
+              padding: var(--sp-2);
+              box-shadow: var(--sh-sm);
+              transition: all .2s;
+              position: relative;
+              overflow: hidden;
+
+              &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 2px;
+                background: var(--grad-btn);
+                opacity: 0;
+                transition: opacity .2s;
+              }
+
+              &:hover {
+                transform: translateY(-2px);
+                box-shadow: var(--sh-md);
+
+                &::before { opacity: 1; }
+              }
+
+              &.wide { grid-column: span 2; }
+
+              & .ii-icon {
+                width: 40px;
+                height: 40px;
+                background: rgba(37 99 235 / .09);
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 10px;
+
+                & svg { stroke: var(--b1); }
+              }
+
+              & .ii-name {
+                font-size: 14px;
+                font-weight: 700;
+                color: var(--tx-hi);
+                margin-bottom: 4px;
+              }
+
+              & .ii-desc {
+                font-size: 13px;
+                color: var(--tx-lo);
+                line-height: 1.5;
+              }
+            }
+          }
+        }
+      }
+
+      /* ─────────────────────────────────────────────
+         MOBILE SERVICES  (< 576px)
+         Strategy:
+         • Tier-1 tabs → full-width pill toggle
+         • Tier-2 selector → 2-col compact grid (online active, offline dimmed)
+         • detail panel → single column (text above, items below)
+         • sdl-items → single column list
+      ───────────────────────────────────────────── */
+      @media (max-width: 575.98px) {
+
+        .services-section {
+
+          & .srv-t1-tabs {
+            width: 100%;
+            border-radius: 12px;
+
+            & .srv-t1-btn {
+              flex: 1;
+              justify-content: center;
+              padding: 10px 16px;
+              font-size: 14px;
+            }
+          }
+
+          & .srv-t2-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: var(--sp-1);
+            margin-bottom: var(--sp-4);
+
+            & .srv-t2-card {
+              padding: var(--sp-2);
+
+              & .t2-icon-wrap {
+                width: 36px;
+                height: 36px;
+                margin-bottom: 8px;
+
+                & svg {
+                  width: 18px;
+                  height: 18px;
+                }
+              }
+
+              & .t2-mode { font-size: 10px; }
+              & .t2-label { font-size: 13px; margin-bottom: 4px; }
+              & .t2-short { display: none; }
+            }
+          }
+
+          & .srv-detail {
+            &.active {
+              grid-template-columns: 1fr;
+              gap: var(--sp-4);
+              padding: var(--sp-3);
+            }
+
+            & .sdl-items {
+              grid-template-columns: 1fr;
+
+              & .sdl-item {
+                &.wide { grid-column: span 1; }
+              }
+            }
+
+            & .sdl-flow {
+              gap: 4px;
+
+              & .fp, & .fp-hi {
+                font-size: 11px;
+                padding: 4px 10px;
+              }
+            }
+          }
+        }
+      }
+
+      /* ─────────────────────────────────────────────
+         PROCESS
+      ───────────────────────────────────────────── */
+      .process-section {
+        background: var(--grad-dark);
+        position: relative;
+        overflow: hidden;
+        padding-block: var(--sp-12);
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(99 155 255 / .3), transparent);
+        }
+
+        & .proc-orb {
+          position: absolute;
+          width: 700px;
+          height: 700px;
+          border-radius: 50%;
+          background: radial-gradient(ellipse, rgba(37 99 235 / .13), transparent 65%);
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          pointer-events: none;
+        }
+
+        & .proc-inner {
+          position: relative;
+          z-index: 1;
+        }
+
+        /* on-dark overrides */
+        & .sec-lbl .sl-en { color: #60A5FA; }
+        & h2 { color: #E8F2FF; }
+        & .sec-desc-txt { color: #7CAAD4; }
+
+        /* timeline rows */
+        & .proc-timeline {
+          display: flex;
+          flex-direction: column;
+          margin-block: var(--sp-8);
+        }
+
+        & .proc-row {
+          display: grid;
+          grid-template-columns: 1fr 80px 1fr;
+          min-height: 144px;
+          align-items: center;
+        }
+
+        & .proc-mid {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          height: 100%;
+        }
+
+        & .proc-vline {
+          flex: 1;
+          width: 2px;
+          background: linear-gradient(180deg, rgba(59 130 246 / .5), rgba(37 99 235 / .2));
+
+          &.inv { background: transparent; }
+        }
+
+        & .proc-circle {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, rgba(20 50 120 / .9), rgba(10 30 80 / .95));
+          border: 2px solid rgba(99 155 255 / .38);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          z-index: 2;
+          flex-shrink: 0;
+          box-shadow: 0 0 20px rgba(59 130 246 / .22);
+          transition: all .3s;
+
+          & svg { stroke: #60A5FA; }
+
+          &:hover {
+            border-color: #60A5FA;
+            box-shadow: 0 0 36px rgba(59 130 246 / .45);
+          }
+
+          &.final {
+            border-color: var(--cyan);
+            box-shadow: 0 0 36px rgba(14 165 233 / .40);
+            background: linear-gradient(135deg, rgba(20 80 180 / .8), rgba(10 50 140 / .9));
+          }
+
+          & .proc-num {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--grad-btn);
+            font-size: 9px;
+            font-family: var(--font-en);
+            font-weight: 800;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+
+        & .proc-card {
+          background: rgba(255 255 255 / .055);
+          border: 1px solid rgba(99 155 255 / .16);
+          border-radius: var(--r);
+          padding: var(--sp-3) var(--sp-4);
+          margin-block: 12px;
+          transition: all .25s;
+          backdrop-filter: blur(4px);
+
+          &:hover {
+            background: rgba(255 255 255 / .09);
+            border-color: rgba(99 155 255 / .32);
+            box-shadow: 0 8px 28px rgba(37 99 235 / .14);
+          }
+
+          &.final-card {
+            border-color: rgba(14 165 233 / .25);
+          }
+
+          & .pc-tag {
+            font-family: var(--font-en);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #60A5FA;
+            margin-bottom: 6px;
+
+            &.final-tag { color: var(--cyan); }
+          }
+
+          & .pc-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #E8F2FF;
+            margin-bottom: 6px;
+          }
+
+          & .pc-desc {
+            font-size: 14px;
+            color: #7CAAD4;
+            line-height: 1.75;
+            margin-bottom: 12px;
+          }
+
+          & .pc-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+
+            & .pc-chip {
+              background: rgba(37 99 235 / .15);
+              border: 1px solid rgba(99 155 255 / .20);
+              border-radius: 20px;
+              padding: 4px 12px;
+              font-size: 11px;
+              font-weight: 600;
+              color: #60A5FA;
+
+              &.final { color: var(--cyan); border-color: rgba(14 165 233 / .25); }
+            }
+          }
+        }
+
+        & .proc-left { padding-right: var(--sp-3); }
+        & .proc-right { padding-left: var(--sp-3); }
+      }
+
+      /* ─────────────────────────────────────────────
+         CTA BANNER
+      ───────────────────────────────────────────── */
+      .cta-banner {
+        padding: var(--sp-8);
+        background: linear-gradient(135deg, rgba(20 70 232 / .22), rgba(10 40 140 / .32));
+        border: 1px solid rgba(99 155 255 / .20);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--sp-6);
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(6px);
+
+        &::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(ellipse at 78% 50%, rgba(59 130 246 / .18), transparent 62%);
+          pointer-events: none;
+        }
+
+        & .cta-hl {
+          font-size: 11px;
+          font-family: var(--font-en);
+          font-weight: 700;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: #60A5FA;
+          margin-bottom: 8px;
+        }
+
+        & .cta-h2 {
+          font-size: clamp(22px, 3vw, 30px);
+          font-weight: 900;
+          color: #E8F2FF;
+          margin-bottom: 8px;
+        }
+
+        & .cta-p {
+          font-size: 16px;
+          color: #7CAAD4;
+          margin-bottom: 0;
+        }
+      }
+
+
+
+ /* ─────────────────────────────────────────────
+         CONTACT FORM SECTION
+      ───────────────────────────────────────────── */
+      .contact-section {
+        position: relative;
+        z-index: 1;
+        margin-top: var(--sp-12);
+
+        & .cf-card {
+          background: rgba(255 255 255 / .06);
+          border: 1px solid rgba(99 155 255 / .18);
+          border-radius: 20px;
+          overflow: hidden;
+          backdrop-filter: blur(8px);
+        }
+
+        /* header stripe */
+        & .cf-head {
+          text-align: center;
+          padding: var(--sp-6) var(--sp-4) var(--sp-4);
+          border-bottom: 1px solid rgba(99 155 255 / .14);
+          position: relative;
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--grad-btn);
+            border-radius: 2px;
+          }
+
+          & .cf-en {
+            font-family: var(--font-en);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #60A5FA;
+            margin-bottom: 8px;
+          }
+
+          & .cf-title {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 900;
+            color: #E8F2FF;
+            margin: 0;
+          }
+        }
+
+        /* form body */
+        & .cf-body {
+          padding: var(--sp-6) var(--sp-8);
+        }
+
+        /* field group */
+        & .cf-field {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+
+          & label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #B8D0F0;
+
+            & .req {
+              color: #60A5FA;
+              margin-left: 2px;
+            }
+          }
+
+          & .cf-hint {
+            font-size: 12px;
+            color: rgba(99 155 255 / .65);
+            margin-top: -2px;
+            margin-bottom: 2px;
+          }
+
+          & input,
+          & select,
+          & textarea {
+            width: 100%;
+            background: rgba(255 255 255 / .07);
+            border: 1.5px solid rgba(99 155 255 / .25);
+            border-radius: 8px;
+            padding: 11px 14px;
+            font-family: var(--font-zh);
+            font-size: 15px;
+            color: #E8F2FF;
+            transition: border-color .2s, background .2s, box-shadow .2s;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+
+            &::placeholder {
+              color: rgba(148 180 230 / .50);
+            }
+
+            &:focus {
+              border-color: rgba(99 155 255 / .70);
+              background: rgba(255 255 255 / .11);
+              box-shadow: 0 0 0 3px rgba(37 99 235 / .18);
+            }
+          }
+
+          /* select arrow */
+          & select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%2360A5FA' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+            cursor: pointer;
+
+            & option {
+              background: #0C1A38;
+              color: #E8F2FF;
+            }
+          }
+
+          & textarea {
+            resize: vertical;
+            min-height: 112px;
+            line-height: 1.6;
+          }
+        }
+
+        /* privacy row */
+        & .cf-privacy {
+          font-size: 13px;
+          color: #7CAAD4;
+          line-height: 1.6;
+
+          & a {
+            color: #60A5FA;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+
+            &:hover { color: #93C5FD; }
+          }
+        }
+
+        /* submit button */
+        & .cf-submit {
+          display: flex;
+          justify-content: center;
+          padding-top: var(--sp-2);
+
+          & button[type="submit"] {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--grad-btn);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 48px;
+            font-family: var(--font-zh);
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            cursor: pointer;
+            box-shadow: 0 4px 24px rgba(20 70 232 / .40);
+            transition: background .2s, transform .15s, box-shadow .15s;
+            min-height: 52px;
+            min-width: 180px;
+            position: relative;
+            overflow: hidden;
+
+            &::after {
+              content: '';
+              position: absolute;
+              inset: 0;
+              background: linear-gradient(
+                105deg,
+                transparent 35%,
+                rgba(255 255 255 / .18) 50%,
+                transparent 65%
+              );
+              transform: translateX(-100%);
+              transition: transform .45s ease;
+            }
+
+            &:hover {
+              background: linear-gradient(135deg, #0D35C8, #1446E8);
+              transform: translateY(-2px);
+              box-shadow: 0 8px 36px rgba(20 70 232 / .48);
+
+              &::after { transform: translateX(100%); }
+            }
+
+            &:active { transform: translateY(0); }
+          }
+        }
+
+        /* validation states */
+        & input:invalid:not(:placeholder-shown),
+        & select:invalid:not([value=""]) {
+          border-color: rgba(239 68 68 / .55);
+        }
+      }
+
+
+
+
+
+
+
+
+      /* ─────────────────────────────────────────────
+         MODAL
+      ───────────────────────────────────────────── */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 900;
+        background: rgba(10 24 60 / .65);
+        backdrop-filter: blur(6px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: var(--sp-3);
+
+        &.open { display: flex; }
+
+        & .modal-box {
+          background: #fff;
+          border-radius: 16px;
+          max-width: 680px;
+          width: 100%;
+          max-height: 90svh;
+          overflow-y: auto;
+          box-shadow: 0 32px 80px rgba(0 0 0 / .35);
+          animation: mopen .3s ease;
+          position: relative;
+        }
+
+        & .modal-header {
+          position: sticky;
+          top: 0;
+          background: #fff;
+          padding: var(--sp-3) var(--sp-4);
+          border-bottom: 1px solid rgba(37 99 235 / .12);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          z-index: 2;
+
+          & .modal-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--tx-hi);
+          }
+        }
+
+        & .modal-close {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: 1.5px solid var(--border);
+          background: transparent;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background .2s;
+
+          & svg { stroke: var(--tx-md); }
+
+          &:hover { background: rgba(37 99 235 / .08); }
+        }
+
+        & .modal-img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+        }
+
+        & .modal-body {
+          padding: var(--sp-4);
+
+          & .modal-ch {
+            font-size: 14px;
+            color: var(--tx-lo);
+            margin-bottom: var(--sp-2);
+            font-weight: 500;
+          }
+
+          & .modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: var(--sp-3);
+          }
+
+          & .modal-text {
+            font-size: 16px;
+            color: var(--tx-md);
+            line-height: 1.75;
+
+            & p { margin-bottom: 14px; }
+            & ul { margin-left: 20px; margin-bottom: 14px; }
+            & li { margin-bottom: 6px; }
+          }
+        }
+      }
+
+      /* ─────────────────────────────────────────────
+         FOOTER
+      ───────────────────────────────────────────── */
+      .site-footer {
+        text-align: center;
+        padding: var(--sp-5);
+        background: #060F22;
+        color: rgba(99 155 255 / .45);
+        font-size: 14px;
+        border-top: 1px solid rgba(99 155 255 / .08);
+      }
+
+      /* ─────────────────────────────────────────────
+         ANIMATIONS
+      ───────────────────────────────────────────── */
+      @keyframes bfloat {
+        0%, 100% { transform: translate(0, 0);          }
+        33%       { transform: translate(18px, -28px);  }
+        66%       { transform: translate(-12px, 18px);  }
+      }
+
+      @keyframes sfloat {
+        0%, 100% { transform: translate(-50%, -50%) translateY(0);    }
+        50%       { transform: translate(-50%, -50%) translateY(-14px); }
+      }
+
+      @keyframes rring {
+        from { transform: translate(-50%, -50%) rotateX(68deg) rotateZ(0deg);   }
+        to   { transform: translate(-50%, -50%) rotateX(68deg) rotateZ(360deg); }
+      }
+
+      @keyframes bpulse {
+        0%, 100% { box-shadow: 0 0 0 0   rgba(37 99 235 / .5); }
+        50%       { box-shadow: 0 0 0 6px rgba(37 99 235 / 0);  }
+      }
+
+      @keyframes fadein  { to { opacity: 1; } }
+      @keyframes spulse  { 0%, 100% { opacity: .4; } 50% { opacity: 1; } }
+      @keyframes logtick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+      @keyframes imgfloat {
+        0%, 100% { transform: translateY(0); }
+        50%       { transform: translateY(-10px); }
+      }
+      @keyframes fadepanel {
+        from { opacity: 0; transform: translateY(8px); }
+        to   { opacity: 1; transform: translateY(0);   }
+      }
+      @keyframes mopen {
+        from { opacity: 0; transform: scale(.95) translateY(16px); }
+        to   { opacity: 1; transform: scale(1)   translateY(0);    }
+      }
+      @keyframes aup {
+        from { opacity: 0; transform: translateY(24px); }
+        to   { opacity: 1; transform: translateY(0);    }
+      }
+
+      /* stagger hero content */
+      .au { opacity: 0; transform: translateY(24px); animation: aup .7s ease forwards; }
+      .au:nth-child(1) { animation-delay: .08s; }
+      .au:nth-child(2) { animation-delay: .16s; }
+      .au:nth-child(3) { animation-delay: .24s; }
+      .au:nth-child(4) { animation-delay: .32s; }
+      .au:nth-child(5) { animation-delay: .40s; }
+      .au:nth-child(6) { animation-delay: .48s; }
+
+      /* scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity .6s ease, transform .6s ease;
+
+        &.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- skip link -->
+    <a class="skip-link" href="#main-content">跳至主要內容</a>
+
+    <!-- ════════════════════════════════
+         NAV
+    ════════════════════════════════ -->
+    <header role="banner">
+      <nav class="site-nav" aria-label="主要導航">
+        <div class="nav-inner">
+          <a class="nav-brand" href="/">
+            <span class="b-main">DIGIWIN</span>
+            <span class="b-sep" aria-hidden="true"></span>
+            <span class="b-zh">就享知</span>
+          </a>
+
+          <ul class="nav-links d-none d-lg-flex">
+            <li><a href="#cases">實際案例</a></li>
+            <li><a href="#services">服務項目</a></li>
+            <li><a href="#process">服務流程</a></li>
+            <li><a href="#contact">預約顧問諮詢</a></li>
+          </ul>
+
+          <a href="#contact" class="btn-nav d-none d-md-inline-flex" aria-label="預約顧問諮詢">
+            預約諮詢
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+
+      <!-- ════════════════════════════════
+           HERO
+      ════════════════════════════════ -->
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-dots" aria-hidden="true"></div>
+        <div class="h-blob hb1" aria-hidden="true"></div>
+        <div class="h-blob hb2" aria-hidden="true"></div>
+        <div class="h-blob hb3" aria-hidden="true"></div>
+        <div class="h-blob hb4" aria-hidden="true"></div>
+        <!-- hero right image -->
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hv-carousel" id="hero-carousel">
+
+            <!-- Slide 1 -->
+            <div class="hv-slide is-active">
+              <img src="images/01.png" alt="就享知品牌形象 1" loading="eager">
+            </div>
+            <!-- Slide 2 -->
+            <div class="hv-slide">
+              <img src="images/02.png" alt="就享知品牌形象 2" loading="lazy">
+            </div>
+            <!-- Slide 3 -->
+            <div class="hv-slide">
+              <img src="images/03.png" alt="就享知品牌形象 3" loading="lazy">
+            </div>
+            <!-- Slide 4 -->
+            <div class="hv-slide">
+              <img src="images/04.png" alt="就享知品牌形象 4" loading="lazy">
+            </div>
+            <!-- Slide 5 -->
+            <div class="hv-slide">
+              <img src="images/05.png" alt="就享知品牌形象 5" loading="lazy">
+            </div>
+
+            <!-- dot indicators -->
+            <div class="hv-dots" role="tablist" aria-label="輪播指示點">
+              <button class="hv-dot is-active" role="tab" aria-selected="true"  aria-label="第 1 張" data-idx="0"></button>
+              <button class="hv-dot"           role="tab" aria-selected="false" aria-label="第 2 張" data-idx="1"></button>
+              <button class="hv-dot"           role="tab" aria-selected="false" aria-label="第 3 張" data-idx="2"></button>
+              <button class="hv-dot"           role="tab" aria-selected="false" aria-label="第 4 張" data-idx="3"></button>
+              <button class="hv-dot"           role="tab" aria-selected="false" aria-label="第 5 張" data-idx="4"></button>
+            </div>
+
+            <!-- progress bar -->
+            <div class="hv-progress" id="hero-progress" aria-hidden="true"></div>
+
+          </div>
+          <!-- <div class="hv-stripe"></div>
+          <div class="h-float hf1"><div class="fn">300+</div><div class="fl">合作品牌</div></div>
+          <div class="h-float hf2"><div class="fn">10M+</div><div class="fl">累積觸及</div></div>
+          <div class="h-float hf3"><div class="fn">B2B</div><div class="fl">台灣最大商機平台</div></div> -->
+        </div>
+
+        <!-- content -->
+        <div class="mw w-100">
+          <div class="hero-content">
+            <div class="hero-badge au">
+              <div class="hb-dot"></div>
+              <span>台灣最大 B2B 內容媒合平台</span>
+            </div>
+
+            <div class="hero-logo-row au">
+              <!-- <span class="hl-en">DigiKnow</span>
+              <span class="hl-zh">就享知</span> -->
+              <img src="images/digiknow_logo.svg" alt="就享知LOGO">
+            </div>
+
+            <h1 id="hero-heading" class="hero-h1 au">
+              打開品牌影響力，<br>
+              <em>從專屬頻道開始！</em>
+            </h1>
+
+            <p class="hero-sub au">Your Channel. Your Voice. Your Brand Power.</p>
+
+            <p class="hero-desc au">
+              交給<strong>最懂你的產業行銷團隊</strong>，讓數位內容成為企業最強的聲量引擎。
+            </p>
+
+            <div class="hero-chips au">
+              <div class="chip">
+                <svg width="16" height="16" fill="none" stroke-width="2" viewBox="0 0 24 24">
+                  <polygon points="23 7 16 12 23 17 23 7"/>
+                  <rect x="1" y="5" width="15" height="14" rx="2"/>
+                </svg>
+                <span>直面商機</span>
+              </div>
+              <div class="chip">
+                <svg width="16" height="16" fill="none" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+                <span>打響品牌</span>
+              </div>
+              <div class="chip">
+                <svg width="16" height="16" fill="none" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+                <span>人脈破圈</span>
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 flex-wrap au">
+              <a href="#contact" class="btn-cta">
+                我要預約諮詢
+                <span class="arr" aria-hidden="true">→</span>
+              </a>
+              <a href="#cases" class="btn-ghost">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+                查看實際案例
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll-hint" aria-hidden="true">
+          <div class="sh-line"></div>
+          <span class="sh-txt">Scroll</span>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════
+           CASES
+      ════════════════════════════════ -->
+      <section class="cases-section sec-pad reveal" id="cases" aria-labelledby="cases-heading">
+        <div class="mw">
+          <div class="sec-hdr mb-5">
+            <div class="sec-lbl">
+              <div class="sl-bar"></div>
+              <span class="sl-en">Success Stories</span>
+            </div>
+            <h2 id="cases-heading" class="mb-2">實際案例</h2>
+            <p>與就享知共同成長的夥伴，用品牌內容創造真實商機</p>
+          </div>
+          <div class="row g-3 mb-3">
+            <div class="col-md-6">
+              <article class="case-card-featured h-100 reveal">
+                <div class="ccf-topbar"></div>
+                <div class="ccf-img">
+                  <img
+                    src="images/penteng.png"
+                    alt="奔騰物流系統" loading="lazy"
+                  >
+                </div>
+                <div class="ccf-body">
+                  <div class="ccf-tags">
+                    <span class="tag-chip">#就享知頻道</span>
+                    <span class="tag-chip">#展會行銷</span>
+                    <span class="tag-chip">#知識聚樂部</span>
+                    <span class="tag-chip">#看展團</span>
+                  </div>
+                  <h3 class="ccf-title">奔騰物流系統</h3>
+                  <p class="ccf-ch">頻道名稱：物流運搬Next</p>
+                  <p class="ccf-quote">
+                    其實一開始接觸就享知團隊時並沒有選擇馬上合作，是經過多次熱情的邀約及每個活動的細緻度出來了，才覺得他們是認真的。
+                  </p>
+                  <p>就享知平台是個公開的平台，邀請各行各業不同的專家無私分享知識的平台。這是非常不容易且很有意義的方向，不容易的是不藏私地分享何其容易，且流量跟觀看者是否是TA也不得而知，但整個平台的出發點核心價值非常明確，的確也開始創造出不同的火花。</p>
+                  <p>尤其2025年的物流展，其帶隊參訪團參觀的規畫前中後及整個流程都掌握得很好，也讓頻道主有正向及多樣的曝光，並實際帶來不同的商機。</p>
+                <p>很榮幸能與就享知一起成長，期待未來不斷的合作能創造雙贏的戰績。
+
+</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-md-6">
+              <article class="case-card-featured h-100 reveal">
+                <div class="ccf-topbar"></div>
+                <div class="ccf-img">
+                  <img
+                    src="images/ganfuzi.png"
+                    alt="甘夫子" loading="lazy"
+                  >
+                </div>
+                <div class="ccf-body">
+                  <div class="ccf-tags">
+                    <span class="tag-chip">#就享知頻道</span>
+                    <span class="tag-chip">#產業講座</span>
+                  </div>
+                  <h3 class="ccf-title">甘夫子</h3>
+                  <p class="ccf-ch">頻道名稱：甘夫子的文房四寶</p>
+                  <p class="ccf-quote">
+                    甘夫子長期深耕於企業管理領域，專注於知識傳授與實務應用。隨著「就享知」——一個聚焦於數位轉型與產業應用的知識平台成立，我深感此平台的使命與自身的教學與研究高度契合，隨即毛遂自薦，爭取成為該平台的頻道主。期望透過更廣泛且精準的觸及，達成：
+                  </p>
+                  <ul class="">
+                      <li>讓知識不僅是學理，更能落地應用</li>
+                      <li>讓案例不只是經驗，更能持續傳承</li>
+                      <li>讓課程不只是闡述，更能推動實踐</li>
+                    </ul>
+                    <p class="card-text">如今，「就享知」已匯聚眾多優秀作者與專業人士，形成活躍的交流與共創生態，並吸引了大量知識愛好者的關注與流量。在此，甘夫子誠摯邀請更多專業寫手與實戰家加入「就享知」，讓您寶貴的洞見與經驗被看見，共同拓展與深化屬於這個時代的知識實踐場。</p>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <!-- secondary 8 -->
+          <div class="row g-3">
+
+            <div class="col-6 col-md-3">
+              <article
+                class="case-card-sm reveal"
+                tabindex="0"
+                aria-label="點開查看恆隆科技夥伴分享"
+                onclick="openModal('modal-henglong')"
+                onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-henglong')"
+              >
+                <div class="csm-img">
+                  <img src="images/henglong.png" alt="恆隆科技" loading="lazy">
+                </div>
+                <div class="csm-body">
+                  <h3 class="csm-name">恆隆科技</h3>
+                  <div class="csm-tags">
+                    <span class="tag-chip">#就享知頻道</span>
+                    <span class="tag-chip">#產業講座</span>
+                    <span class="tag-chip">#場域展示</span>
+                  </div>
+                  <button
+                    class="btn-text-arrow"
+                    onclick="event.stopPropagation();openModal('modal-henglong')"
+                    aria-haspopup="dialog"
+                  >
+                    夥伴分享
+                    <span class="bta-icon" aria-hidden="true">
+                      <svg width="10" height="10" fill="none" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </span>
+                  </button>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-6 col-md-3">
+              <article
+                class="case-card-sm reveal"
+                tabindex="0"
+                aria-label="點開查看新晶科技夥伴分享"
+                onclick="openModal('modal-xinjing')"
+                onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-xinjing')"
+              >
+                <div class="csm-img">
+                  <img src="images/xinjing.png" alt="新晶科技" loading="lazy">
+                </div>
+                <div class="csm-body">
+                  <h3 class="csm-name">新晶科技</h3>
+                  <div class="csm-tags">
+                    <span class="tag-chip">#就享知頻道</span>
+                    <span class="tag-chip">#知識聚樂部</span>
+                    <span class="tag-chip">#內容採訪</span>
+                  </div>
+                  <button
+                    class="btn-text-arrow"
+                    onclick="event.stopPropagation();openModal('modal-xinjing')"
+                    aria-haspopup="dialog"
+                  >
+                    夥伴分享
+                    <span class="bta-icon" aria-hidden="true">
+                      <svg width="10" height="10" fill="none" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </span>
+                  </button>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-6 col-md-3">
+              <article
+                class="case-card-sm reveal"
+                tabindex="0"
+                aria-label="點開查看偉勝乾燥工業夥伴分享"
+                onclick="openModal('modal-weisheng')"
+                onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-weisheng')"
+              >
+                <div class="csm-img">
+                  <img src="images/weisheng.png" alt="偉勝乾燥工業" loading="lazy">
+                </div>
+                <div class="csm-body">
+                  <h3 class="csm-name">偉勝乾燥工業</h3>
+                  <div class="csm-tags">
+                    <span class="tag-chip">#就享知頻道</span>
+                    <span class="tag-chip">#展會行銷</span>
+                    <span class="tag-chip">#知識聚樂部</span>
+                  </div>
+                  <button
+                    class="btn-text-arrow"
+                    onclick="event.stopPropagation();openModal('modal-weisheng')"
+                    aria-haspopup="dialog"
+                  >
+                    夥伴分享
+                    <span class="bta-icon" aria-hidden="true">
+                      <svg width="10" height="10" fill="none" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </span>
+                  </button>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-6 col-md-3">
+              <article
+                class="case-card-sm reveal"
+                tabindex="0"
+                aria-label="點開查看巨緯科技夥伴分享"
+                onclick="openModal('modal-juwei')"
+                onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-juwei')"
+              >
+                <div class="csm-img">
+                  <img src="images/juwei.png" alt="巨緯科技" loading="lazy">
+                </div>
+                <div class="csm-body">
+                  <h3 class="csm-name">巨緯科技</h3>
+                  <div class="csm-tags">
+                    <span class="tag-chip">#就享知頻道</span>
+                    <span class="tag-chip">#展會行銷</span>
+                    <span class="tag-chip">#產業講座</span>
+                  </div>
+                  <button
+                    class="btn-text-arrow"
+                    onclick="event.stopPropagation();openModal('modal-juwei')"
+                    aria-haspopup="dialog"
+                  >
+                    夥伴分享
+                    <span class="bta-icon" aria-hidden="true">
+                      <svg width="10" height="10" fill="none" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </span>
+                  </button>
+                </div>
+              </article>
+            </div>
+
+            <!-- no-modal 4 -->
+            <div class="col-6 col-md-3">
+              <article class="case-card-sm reveal">
+                <div class="csm-img"><img src="images/quansheng.png" alt="銓盛電子" loading="lazy"></div>
+                <div class="csm-body">
+                  <h3 class="csm-name">銓盛電子</h3>
+                  <div class="csm-tags">
+                    <span class="tag-chip">#就享知頻道</span>
+                    <span class="tag-chip">#展會行銷</span>
+                    <span class="tag-chip">#節目曝光</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-6 col-md-3">
+              <article class="case-card-sm reveal">
+                <div class="csm-img"><img src="images/ctbc.jpg" alt="中國信託商業銀行" loading="lazy"></div>
+                <div class="csm-body">
+                  <h3 class="csm-name">中國信託商業銀行</h3>
+                  <div class="csm-tags"><span class="tag-chip">#研討會</span></div>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-6 col-md-3">
+              <article class="case-card-sm reveal">
+                <div class="csm-img"><img src="images/iscoollab.png" alt="伊斯酷軟體科技" loading="lazy"></div>
+                <div class="csm-body">
+                  <h3 class="csm-name">伊斯酷軟體科技</h3>
+                  <div class="csm-tags">
+                    <span class="tag-chip">#就享知頻道</span>
+                    <span class="tag-chip">#研討會</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-6 col-md-3">
+              <article class="case-card-sm reveal">
+                <div class="csm-img"><img src="images/sinopac.png" alt="永豐銀行" loading="lazy"></div>
+                <div class="csm-body">
+                  <h3 class="csm-name">永豐銀行</h3>
+                  <div class="csm-tags">
+                    <span class="tag-chip">#研討會</span>
+                    <span class="tag-chip">#Meta投廣</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+          </div><!-- /secondary row -->
+
+          <!-- logo scroll -->
+          <div class="logos-scroll" aria-hidden="true">
+            <div class="logos-track">
+              <span class="logo-pill">奔騰物流系統</span>
+              <span class="logo-pill">甘夫子</span>
+              <span class="logo-pill">恆隆科技</span>
+              <span class="logo-pill">新晶科技</span>
+              <span class="logo-pill">偉勝乾燥工業</span>
+              <span class="logo-pill">巨緯科技</span>
+              <span class="logo-pill">銓盛電子</span>
+              <span class="logo-pill">中國信託商業銀行</span>
+              <span class="logo-pill">伊斯酷軟體科技</span>
+              <span class="logo-pill">永豐銀行</span>
+              <span class="logo-pill">奔騰物流系統</span>
+              <span class="logo-pill">甘夫子</span>
+              <span class="logo-pill">恆隆科技</span>
+              <span class="logo-pill">新晶科技</span>
+              <span class="logo-pill">偉勝乾燥工業</span>
+              <span class="logo-pill">巨緯科技</span>
+              <span class="logo-pill">銓盛電子</span>
+              <span class="logo-pill">中國信託商業銀行</span>
+              <span class="logo-pill">伊斯酷軟體科技</span>
+              <span class="logo-pill">永豐銀行</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════
+           SERVICES
+      ════════════════════════════════ -->
+      <section class="services-section sec-pad reveal" id="services" aria-labelledby="services-heading">
+        <div class="mw">
+          <div class="sec-hdr mb-5">
+            <div class="sec-lbl">
+              <div class="sl-bar"></div>
+              <span class="sl-en">What We Offer</span>
+            </div>
+            <h2 id="services-heading" class="mb-2">服務項目與詳細說明</h2>
+            <p>線上內容 × 線下活動，全方位打造品牌聲量引擎</p>
+          </div>
+
+          <!-- Tier-1: 線上 / 線下 -->
+          <div class="srv-t1-tabs" role="tablist" aria-label="服務類型">
+            <button
+              class="srv-t1-btn"
+              role="tab"
+              aria-selected="true"
+              id="t1-online"
+              aria-controls="panel-online"
+              data-mode="online"
+              onclick="switchTier1('online')"
+            >
+              <svg class="t1-icon" width="18" height="18" fill="none" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20M12 2a15.3 15.3 0 010 20"/>
+              </svg>
+              線上服務
+            </button>
+            <button
+              class="srv-t1-btn"
+              role="tab"
+              aria-selected="false"
+              id="t1-offline"
+              aria-controls="panel-offline"
+              data-mode="offline"
+              onclick="switchTier1('offline')"
+            >
+              <svg class="t1-icon" width="18" height="18" fill="none" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+              </svg>
+              線下服務
+            </button>
+          </div>
+
+          <!-- ── ONLINE panel ── -->
+          <div id="panel-online" role="tabpanel" aria-labelledby="t1-online">
+
+            <!-- Tier-2 cards -->
+            <div class="srv-t2-grid" role="tablist" aria-label="線上服務項目">
+
+              <div
+                class="srv-t2-card"
+                role="tab" tabindex="0"
+                aria-selected="true"
+                data-detail="detail-content"
+                onclick="switchDetail('panel-online','detail-content')"
+                onkeydown="if(event.key==='Enter'||event.key===' ')switchDetail('panel-online','detail-content')"
+              >
+                <div class="t2-tick" aria-hidden="true">
+                  <svg width="10" height="10" fill="none" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="t2-icon-wrap">
+                  <svg width="22" height="22" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                    <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/>
+                  </svg>
+                </div>
+                <div class="t2-mode">線上</div>
+                <div class="t2-label">內容製作</div>
+                <div class="t2-short">頻道開立、影音、文章、Podcast 一站完成</div>
+              </div>
+
+              <div
+                class="srv-t2-card"
+                role="tab" tabindex="0"
+                aria-selected="false"
+                data-detail="detail-ads"
+                onclick="switchDetail('panel-online','detail-ads')"
+                onkeydown="if(event.key==='Enter'||event.key===' ')switchDetail('panel-online','detail-ads')"
+              >
+                <div class="t2-tick" aria-hidden="true">
+                  <svg width="10" height="10" fill="none" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="t2-icon-wrap">
+                  <svg width="22" height="22" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                  </svg>
+                </div>
+                <div class="t2-mode">線上</div>
+                <div class="t2-label">廣告投放</div>
+                <div class="t2-short">社群、EDM、Google Ads、Podcast 廣告</div>
+              </div>
+
+              <!-- offline cards (dimmed in online mode) -->
+              <div
+                class="srv-t2-card is-dim"
+                role="tab" tabindex="0"
+                aria-selected="false"
+                data-detail="detail-event"
+                data-tier="offline"
+                onclick="switchDetail('panel-offline','detail-event')"
+                onkeydown="if(event.key==='Enter'||event.key===' ')switchDetail('panel-offline','detail-event')"
+                title="切換至線下服務：活動統包"
+              >
+                <div class="t2-icon-wrap">
+                  <svg width="22" height="22" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                </div>
+                <div class="t2-mode">線下</div>
+                <div class="t2-label">活動統包</div>
+                <div class="t2-short">餐酒會、研討會、展覽統籌執行</div>
+              </div>
+
+              <div
+                class="srv-t2-card is-dim"
+                role="tab" tabindex="0"
+                aria-selected="false"
+                data-detail="detail-venue"
+                data-tier="offline"
+                onclick="switchDetail('panel-offline','detail-venue')"
+                onkeydown="if(event.key==='Enter'||event.key===' ')switchDetail('panel-offline','detail-venue')"
+                title="切換至線下服務：場域展示"
+              >
+                <div class="t2-icon-wrap">
+                  <svg width="22" height="22" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                  </svg>
+                </div>
+                <div class="t2-mode">線下</div>
+                <div class="t2-label">場域展示</div>
+                <div class="t2-short">展廳規劃、導覽腳本、落地執行</div>
+              </div>
+            </div>
+
+            <!-- detail panels -->
+            <div id="detail-content" class="srv-detail active" role="tabpanel" aria-labelledby="">
+              <div>
+                <p class="sdl-eyebrow">線上｜內容製作</p>
+                <h3 class="sdl-title">從專屬頻道到影音內容，我們幫你打造企業最強的影響力引擎</h3>
+                <p class="sdl-desc">內容是品牌價值的長期資產，我們協助企業建立自己的「專屬內容頻道」讓品牌擁有穩定的輸出、被看見、累積信任。</p>
+                <a href="#contact" class="btn-detail-cta">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16z"/>
+                  </svg>
+                  立即諮詢此方案
+                </a>
+              </div>
+              <div class="sdl-items">
+                <div class="sdl-item">
+                  <div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+                  <div class="ii-name">就享知專屬頻道開立</div>
+                  <div class="ii-desc">建立品牌內容主場，提升可見度</div>
+                </div>
+                <div class="sdl-item">
+                  <div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+                  <div class="ii-name">專業文章撰寫</div>
+                  <div class="ii-desc">看懂企業問題與需求，拆解議題、設計可行解法，推動方案在現場落地</div>
+                </div>
+                <div class="sdl-item">
+                  <div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+                  <div class="ii-name">短影音拍攝</div>
+                  <div class="ii-desc">腳本、拍攝、剪輯一條龍</div>
+                </div>
+                <div class="sdl-item">
+                  <div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 10l4.553-2.069A1 1 0 0121 8.87V15.13a1 1 0 01-1.447.9L15 14"/><rect x="1" y="5" width="14" height="14" rx="2"/></svg></div>
+                  <div class="ii-name">形象影片拍攝</div>
+                  <div class="ii-desc">打造企業品牌調性</div>
+                </div>
+                <div class="sdl-item wide">
+                  <div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg></div>
+                  <div class="ii-name">Podcast 內容製作</div>
+                  <div class="ii-desc">主持、腳本、錄音到後製，完整交付</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="detail-ads" class="srv-detail" role="tabpanel">
+              <div>
+                <p class="sdl-eyebrow">線上｜廣告投放</p>
+                <h3 class="sdl-title">精準曝光、擴大觸及，讓品牌能量更快被看見</h3>
+                <p class="sdl-desc">策略流程：</p>
+                <div class="sdl-flow">
+                  <span class="fp">目標定義</span><span class="fa">→</span>
+                  <span class="fp">受眾建立</span><span class="fa">→</span>
+                  <span class="fp">素材製作</span><span class="fa">→</span>
+                  <span class="fp">投放測試</span><span class="fa">→</span>
+                  <span class="fp fp-hi">每週優化</span>
+                </div>
+                <a href="#contact" class="btn-detail-cta mt-4">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16z"/>
+                  </svg>
+                  立即諮詢此方案
+                </a>
+              </div>
+              <div class="sdl-items">
+                <div class="sdl-item">
+                  <div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></div>
+                  <div class="ii-name">社群廣告投放</div>
+                  <div class="ii-desc">觸及決策者與目標族群</div>
+                </div>
+                <div class="sdl-item">
+                  <div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                  <div class="ii-name">EDM 廣告投放</div>
+                  <div class="ii-desc">精準進入企業受眾信箱</div>
+                </div>
+                <div class="sdl-item">
+                  <div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+                  <div class="ii-name">Google Ads</div>
+                  <div class="ii-desc">關鍵字、展示網絡，讓需求族群主動找到你</div>
+                </div>
+                <div class="sdl-item">
+                  <div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/></svg></div>
+                  <div class="ii-name">Podcast 廣告投放</div>
+                  <div class="ii-desc">搶占目標聽眾心佔率</div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /panel-online -->
+
+          <!-- ── OFFLINE panel ── -->
+          <div id="panel-offline" role="tabpanel" aria-labelledby="t1-offline" hidden>
+
+            <div class="srv-t2-grid" role="tablist" aria-label="線下服務項目">
+
+              <!-- online cards dimmed -->
+              <div
+                class="srv-t2-card is-dim"
+                role="tab" tabindex="0"
+                aria-selected="false"
+                data-detail="detail-content"
+                data-tier="online"
+                onclick="switchDetail('panel-online','detail-content')"
+                onkeydown="if(event.key==='Enter'||event.key===' ')switchDetail('panel-online','detail-content')"
+                title="切換至線上服務：內容製作"
+              >
+                <div class="t2-icon-wrap"><svg width="22" height="22" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+                <div class="t2-mode">線上</div>
+                <div class="t2-label">內容製作</div>
+                <div class="t2-short">頻道開立、影音、文章、Podcast 一站完成</div>
+              </div>
+
+              <div
+                class="srv-t2-card is-dim"
+                role="tab" tabindex="0"
+                aria-selected="false"
+                data-detail="detail-ads"
+                data-tier="online"
+                onclick="switchDetail('panel-online','detail-ads')"
+                onkeydown="if(event.key==='Enter'||event.key===' ')switchDetail('panel-online','detail-ads')"
+                title="切換至線上服務：廣告投放"
+              >
+                <div class="t2-icon-wrap"><svg width="22" height="22" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+                <div class="t2-mode">線上</div>
+                <div class="t2-label">廣告投放</div>
+                <div class="t2-short">社群、EDM、Google Ads、Podcast 廣告</div>
+              </div>
+
+              <div
+                class="srv-t2-card"
+                role="tab" tabindex="0"
+                aria-selected="true"
+                data-detail="detail-event"
+                onclick="switchDetail('panel-offline','detail-event')"
+                onkeydown="if(event.key==='Enter'||event.key===' ')switchDetail('panel-offline','detail-event')"
+              >
+                <div class="t2-tick" aria-hidden="true">
+                  <svg width="10" height="10" fill="none" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="t2-icon-wrap">
+                  <svg width="22" height="22" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="18" rx="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                </div>
+                <div class="t2-mode">線下</div>
+                <div class="t2-label">活動統包</div>
+                <div class="t2-short">餐酒會、研討會、展覽統籌執行</div>
+              </div>
+
+              <div
+                class="srv-t2-card"
+                role="tab" tabindex="0"
+                aria-selected="false"
+                data-detail="detail-venue"
+                onclick="switchDetail('panel-offline','detail-venue')"
+                onkeydown="if(event.key==='Enter'||event.key===' ')switchDetail('panel-offline','detail-venue')"
+              >
+                <div class="t2-tick" aria-hidden="true">
+                  <svg width="10" height="10" fill="none" stroke-width="3" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="t2-icon-wrap">
+                  <svg width="22" height="22" fill="none" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                  </svg>
+                </div>
+                <div class="t2-mode">線下</div>
+                <div class="t2-label">場域展示</div>
+                <div class="t2-short">展廳規劃、導覽腳本、落地執行</div>
+              </div>
+            </div>
+
+            <div id="detail-event" class="srv-detail active" role="tabpanel">
+              <div>
+                <p class="sdl-eyebrow">線下｜活動統包</p>
+                <h3 class="sdl-title">從定位、講者邀約到現場執行，一站式讓活動無死角</h3>
+                <p class="sdl-desc">以企業級思維統包全場，從策略定位到現場執行，為企業打造放大品牌聲量的關鍵活動。</p>
+                <a href="#contact" class="btn-detail-cta">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16z"/>
+                  </svg>
+                  立即諮詢此方案
+                </a>
+              </div>
+              <div class="sdl-items">
+                <div class="sdl-item"><div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="ii-name">高階餐酒會</div><div class="ii-desc">吸引決策者、建立品牌信任</div></div>
+                <div class="sdl-item"><div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="ii-name">研討會</div><div class="ii-desc">從議程到講者推薦、現場整合、場布物料、曝光</div></div>
+                <div class="sdl-item"><div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div class="ii-name">記者會</div><div class="ii-desc">媒體曝光、公關話術、場佈物料</div></div>
+                <div class="sdl-item"><div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div><div class="ii-name">展覽活動規劃</div><div class="ii-desc">展覽曝光、展場導覽活動、影音行銷拍攝、SG</div></div>
+              </div>
+            </div>
+
+            <div id="detail-venue" class="srv-detail" role="tabpanel">
+              <div>
+                <p class="sdl-eyebrow">線下｜場域展示</p>
+                <h3 class="sdl-title">從定位到現場執行，一站式讓活動無死角</h3>
+                <p class="sdl-desc">透過場域的精心設計，將品牌理念轉化為難忘的體驗，讓訪客深入了解企業核心價值。</p>
+                <a href="#contact" class="btn-detail-cta">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16z"/>
+                  </svg>
+                  立即諮詢此方案
+                </a>
+              </div>
+              <div class="sdl-items">
+                <div class="sdl-item"><div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><div class="ii-name">展示動線規劃</div><div class="ii-desc">以故事線引導訪客探索技術亮點</div></div>
+                <div class="sdl-item"><div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="ii-name">場域視覺設計</div><div class="ii-desc">含區域物料、互動螢幕、導視系統</div></div>
+                <div class="sdl-item"><div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="ii-name">企業導覽腳本</div><div class="ii-desc">安排專業講師，讓解說變成品牌敘事</div></div>
+                <div class="sdl-item"><div class="ii-icon"><svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="ii-name">落地執行統籌</div><div class="ii-desc">場地施工、設備串接、現場管理等</div></div>
+              </div>
+            </div>
+
+          </div><!-- /panel-offline -->
+        </div>
+      </section>
+
+      <!-- ════════════════════════════════
+           PROCESS
+      ════════════════════════════════ -->
+      <section class="process-section reveal" id="process" aria-labelledby="process-heading">
+        <div class="proc-orb" aria-hidden="true"></div>
+
+        <div class="proc-inner mw">
+          <div class="sec-hdr mb-5">
+            <div class="sec-lbl">
+              <div class="sl-bar"></div>
+              <span class="sl-en">Service Process</span>
+            </div>
+            <h2 id="process-heading" class="mb-2">服務流程</h2>
+            <p class="sec-desc-txt">從第一次接觸到品牌聲量持續成長，我們全程陪跑</p>
+          </div>
+
+          <div class="proc-timeline">
+
+            <!-- Step 1 — card right -->
+            <div class="proc-row">
+              <div class="proc-left"></div>
+              <div class="proc-mid" aria-hidden="true">
+                <div class="proc-vline inv"></div>
+                <div class="proc-circle">
+                  <span class="proc-num">01</span>
+                  <svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+                </div>
+                <div class="proc-vline"></div>
+              </div>
+              <div class="proc-right">
+                <div class="proc-card">
+                  <div class="pc-tag">Step 01</div>
+                  <h3 class="pc-title">預約填寫</h3>
+                  <p class="pc-desc">填寫顧問諮詢服務表單，告訴我們你的品牌現況與需求。</p>
+                  <!-- <div class="pc-chips"><span class="pc-chip">顧問諮詢表單</span></div> -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 — card left -->
+            <!-- <div class="proc-row">
+              <div class="proc-left">
+                <div class="proc-card">
+                  <div class="pc-tag">Step 02</div>
+                  <h3 class="pc-title">聯繫拜訪</h3>
+                  <p class="pc-desc">專人與貴公司聯繫，約立拜訪時間，了解更多背景資訊。</p>
+                  <div class="pc-chips">
+                    <span class="pc-chip">專人聯繫</span>
+                    <span class="pc-chip">約立拜訪時間</span>
+                  </div>
+                </div>
+              </div>
+              <div class="proc-mid" aria-hidden="true">
+                <div class="proc-vline"></div>
+                <div class="proc-circle">
+                  <span class="proc-num">02</span>
+                  <svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+                </div>
+                <div class="proc-vline"></div>
+              </div>
+              <div class="proc-right"></div>
+            </div> -->
+
+            <!-- Step 3 — card right -->
+            <!-- <div class="proc-row">
+              <div class="proc-left"></div>
+              <div class="proc-mid" aria-hidden="true">
+                <div class="proc-vline"></div>
+                <div class="proc-circle">
+                  <span class="proc-num">03</span>
+                  <svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                </div>
+                <div class="proc-vline"></div>
+              </div>
+              <div class="proc-right">
+                <div class="proc-card">
+                  <div class="pc-tag">Step 03</div>
+                  <h3 class="pc-title">專人拜訪</h3>
+                  <p class="pc-desc">了解貴公司產品、預算，概覽本公司服務範圍，進行深度溝通。</p>
+                  <div class="pc-chips">
+                    <span class="pc-chip">了解產品與預算</span>
+                    <span class="pc-chip">服務範圍說明</span>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- Step 4 — card left -->
+            <div class="proc-row">
+              <div class="proc-left">
+                <div class="proc-card">
+                  <div class="pc-tag">Step 02</div>
+                  <h3 class="pc-title">聯繫拜訪</h3>
+                  <p class="pc-desc">專人與貴公司聯繫 <br>約立拜訪時間</p>
+                  <!-- <div class="pc-chips">
+                    <span class="pc-chip">方案組合</span>
+                    <span class="pc-chip">執行時程</span>
+                  </div> -->
+                </div>
+              </div>
+              <div class="proc-mid" aria-hidden="true">
+                <div class="proc-vline"></div>
+                <div class="proc-circle">
+                  <span class="proc-num">02</span>
+                  <!-- <svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> -->
+
+                </div>
+                <div class="proc-vline"></div>
+              </div>
+              <div class="proc-right"></div>
+            </div>
+
+            <!-- Step 5 — card right -->
+            <!-- <div class="proc-row">
+              <div class="proc-left"></div>
+              <div class="proc-mid" aria-hidden="true">
+                <div class="proc-vline"></div>
+                <div class="proc-circle">
+                  <span class="proc-num">05</span>
+                  <svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="proc-vline"></div>
+              </div>
+              <div class="proc-right">
+                <div class="proc-card">
+                  <div class="pc-tag">Step 05</div>
+                  <h3 class="pc-title">合約簽定</h3>
+                  <p class="pc-desc">確認方案、報價及提案，簽訂合約，正式展開合作關係。</p>
+                  <div class="pc-chips">
+                    <span class="pc-chip">確認報價</span>
+                    <span class="pc-chip">簽訂合約</span>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <!-- Step 6 — card left, final -->
+            <div class="proc-row">
+              <div class="proc-left">
+
+              </div>
+              <div class="proc-mid" aria-hidden="true">
+                <div class="proc-vline"></div>
+                <div class="proc-circle final">
+                  <span class="proc-num">03</span>
+                  <!-- <svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> -->
+                </div>
+                <div class="proc-vline inv"></div>
+              </div>
+              <div class="proc-right">
+                                <div class="proc-card final-card">
+                  <div class="pc-tag final-tag">Step 03</div>
+                  <h3 class="pc-title">合作提案</h3>
+                  <p class="pc-desc">提供專業方案組合 <br>執行內容及時程提案 <br>確認報價與簽訂合約</p>
+                  <!-- <div class="pc-chips">
+                    <span class="pc-chip final">提案修改</span>
+                    <span class="pc-chip final">依時程執行</span>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /proc-timeline -->
+
+          <!-- CTA -->
+          <!-- <div class="cta-banner" id="contact">
+            <div>
+              <p class="cta-hl">Contact Us</p>
+              <h2 class="cta-h2">準備好打開品牌影響力了嗎？</h2>
+              <p class="cta-p">立即預約顧問諮詢，交給最懂你的產業行銷團隊</p>
+            </div>
+            <a
+              href="https://www.digiwin.com.tw/digiknow/service/#contact"
+              class="btn-cta flex-shrink-0"
+              aria-label="我要預約諮詢"
+              style="white-space: nowrap; position: relative; z-index: 1;"
+            >
+              我要預約諮詢 →
+            </a>
+          </div> -->
+
+
+          <!-- 預約諮詢表單 -->
+          <div class="contact-section" id="contact">
+            <div class="cf-card">
+
+              <!-- header -->
+              <div class="cf-head">
+                <p class="cf-en">Connect Team</p>
+                <h2 class="cf-title">預約諮詢</h2>
+              </div>
+
+              <!-- form -->
+              <div class="cf-body">
+                <form
+                  id="contact-form"
+                  novalidate
+                  onsubmit="handleFormSubmit(event)"
+                >
+                  <!-- row 1: 完整公司名稱 / 中文姓名 / 電話號碼 -->
+                  <div class="row g-3 mb-3">
+                    <div class="col-12 col-md-4">
+                      <div class="cf-field">
+                        <label for="cf-company">
+                          完整公司名稱<span class="req" aria-hidden="true">＊</span>
+                        </label>
+                        <input
+                          type="text"
+                          id="cf-company"
+                          name="company"
+                          placeholder="請輸入公司全名"
+                          required
+                          autocomplete="organization"
+                        >
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="cf-field">
+                        <label for="cf-name">
+                          中文姓名<span class="req" aria-hidden="true">＊</span>
+                        </label>
+                        <input
+                          type="text"
+                          id="cf-name"
+                          name="name"
+                          placeholder="請輸入姓名"
+                          required
+                          autocomplete="name"
+                        >
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="cf-field">
+                        <label for="cf-phone">
+                          電話號碼<span class="req" aria-hidden="true">＊</span>
+                        </label>
+                        <p class="cf-hint">格式範例：0289111688 或 0910123456</p>
+                        <input
+                          type="tel"
+                          id="cf-phone"
+                          name="phone"
+                          placeholder="請輸入電話"
+                          required
+                          autocomplete="tel"
+                          pattern="[0-9]{8,10}"
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- row 2: 電子信箱 / 職能 / 職稱 -->
+                  <div class="row g-3 mb-3">
+                    <div class="col-12 col-md-4">
+                      <div class="cf-field">
+                        <label for="cf-email">
+                          電子信箱<span class="req" aria-hidden="true">＊</span>
+                        </label>
+                        <input
+                          type="email"
+                          id="cf-email"
+                          name="email"
+                          placeholder="範例：example@abc.com"
+                          required
+                          autocomplete="email"
+                        >
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="cf-field">
+                        <label for="cf-function">
+                          職能<span class="req" aria-hidden="true">＊</span>
+                        </label>
+                        <select id="cf-function" name="function" required>
+                          <option value="" disabled selected>請選取</option>
+                          <option>業務 / 銷售</option>
+                          <option>行銷 / 品牌</option>
+                          <option>產品 / 研發</option>
+                          <option>管理 / 經營</option>
+                          <option>人資 / 行政</option>
+                          <option>財務 / 法務</option>
+                          <option>資訊 / 技術</option>
+                          <option>其他</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <div class="cf-field">
+                        <label for="cf-title">職稱</label>
+                        <select id="cf-title" name="title">
+                          <option value="" disabled selected>請選取</option>
+                          <option>負責人 / 董事長</option>
+                          <option>總經理 / CEO</option>
+                          <option>副總經理 / VP</option>
+                          <option>總監 / Director</option>
+                          <option>經理 / Manager</option>
+                          <option>主任 / Supervisor</option>
+                          <option>專員 / Staff</option>
+                          <option>其他</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- row 3: 訊息 -->
+                  <div class="row g-3 mb-4">
+                    <div class="col-12">
+                      <div class="cf-field">
+                        <label for="cf-message">
+                          訊息<span class="req" aria-hidden="true">＊</span>
+                        </label>
+                        <textarea
+                          id="cf-message"
+                          name="message"
+                          placeholder="請在這裡描述您的需求"
+                          required
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- privacy -->
+                  <p class="cf-privacy mb-4">
+                    請確認您接受
+                    <a href="https://www.digiwin.com.tw/privacy/" target="_blank" rel="noopener">鼎新數智的隱私權政策</a>，
+                    並同意鼎新數智透過電子郵件或簡訊的形式傳送服務訊息給您。您可以隨時取消訂閱。
+                  </p>
+
+                  <!-- submit -->
+                  <div class="cf-submit">
+                    <button type="submit" aria-label="送出預約諮詢表單">
+                      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                      </svg>
+                      送出
+                    </button>
+                  </div>
+
+                </form>
+
+                <!-- success state (hidden by default) -->
+                <div id="cf-success" hidden style="text-align:center; padding: var(--sp-8) 0;">
+                  <svg width="52" height="52" fill="none" stroke="#60A5FA" stroke-width="1.5" viewBox="0 0 24 24" style="margin:0 auto var(--sp-3)">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="9 12 11 14 15 10"/>
+                  </svg>
+                  <h3 style="color:#E8F2FF; font-size:22px; font-weight:800; margin-bottom:8px;">表單已送出！</h3>
+                  <p style="color:#7CAAD4;">我們的顧問團隊將在 1–2 個工作天內與您聯繫。</p>
+                </div>
+
+              </div><!-- /cf-body -->
+            </div><!-- /cf-card -->
+          </div><!-- /contact-section -->
+
+        </div>
+      </section>
+
+
+
+
+
+      
+
+
+    </main>
+
+    <!-- ════════════════════════════════
+         MODALS
+    ════════════════════════════════ -->
+
+    <!-- 恆隆科技 -->
+    <div class="modal-overlay" id="modal-henglong" role="dialog" aria-modal="true" aria-labelledby="mh-title"
+      onclick="closeModalOutside(event,'modal-henglong')">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h2 class="modal-title" id="mh-title">恆隆科技</h2>
+          <button class="modal-close" onclick="closeModal('modal-henglong')" aria-label="關閉視窗">
+            <svg width="18" height="18" fill="none" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+        <img class="modal-img" src="images/henglong.png" alt="恆隆科技">
+        <div class="modal-body">
+          <p class="modal-ch">頻道名稱：嗶嗶RFID-恆隆科技</p>
+          <div class="modal-tags">
+            <span class="tag-chip">#就享知頻道</span>
+            <span class="tag-chip">#產業講座</span>
+            <span class="tag-chip">#場域展示</span>
+          </div>
+          <div class="modal-text">
+            <p>「恆隆科技團隊」真心誠意推薦「OMO 串聯 X 商機與行動」此一策略的實踐模式。</p>
+            <p>成功打破線上與線下的割裂，有了數據依據為核心，不但整合註冊會員、訪客的行為軌跡以及即時互動機制；還將網路流量高效轉化為可持續更新內容的行動，和可追蹤會員反饋的商機成果。</p>
+            <p>利用OMO架構模式，「恆隆科技團隊」不僅能精準掌握潛在客戶在線上接觸內容後的線下行為反應，更能觸發團隊部門對應於行銷與技術服務行動，顯著提升訪客由「姑且一試」，變成「信心大增」的心境轉換。相對的，成交機率大為提升。</p>
+            <p>經過2年實務經驗與數據顯示；留言、電洽筆數57筆，成交32筆。這模式能有效降低獲客成本、提高客戶加購與黏著度，為「恆隆科技團隊」累積出長期可用的第一方數據資產。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 新晶科技 -->
+    <div class="modal-overlay" id="modal-xinjing" role="dialog" aria-modal="true" aria-labelledby="mx-title"
+      onclick="closeModalOutside(event,'modal-xinjing')">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h2 class="modal-title" id="mx-title">新晶科技</h2>
+          <button class="modal-close" onclick="closeModal('modal-xinjing')" aria-label="關閉視窗">
+            <svg width="18" height="18" fill="none" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+        <img class="modal-img" src="images/xinjing.png" alt="新晶科技">
+        <div class="modal-body">
+          <p class="modal-ch">頻道名稱：安全365</p>
+          <div class="modal-tags">
+            <span class="tag-chip">#就享知頻道</span>
+            <span class="tag-chip">#知識聚樂部</span>
+            <span class="tag-chip">#內容採訪</span>
+          </div>
+          <div class="modal-text">
+            <p>「就享知」平台提供了多元且實用的內容，成為員工持續學習的重要管道。為了回饋平台並擴大知識交流的深度與廣度，新晶也成立了「安全365」頻道，分享居家安全警報器等相關安裝與預防措施知識。我們期盼透過這些內容，協助更多讀者建立「預警重於災難」的觀念，避免生命與財產因意外而受到損害。</p>
+            <p>此外，知識聚樂部每次舉辦的活動，都在主持人的精心安排下展現高度的專業性與前瞻性。從 ESG、工業 4.0 自動化、財務規劃，到當前最熱門的 AI 應用，每一場活動都讓參與者在交流中獲得策略啟發。</p>
+            <p>期待未來能與更多夥伴共同前行，為產業創造更高效、更安全、更具前瞻性的未來。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 偉勝乾燥工業 -->
+    <div class="modal-overlay" id="modal-weisheng" role="dialog" aria-modal="true" aria-labelledby="mw-title"
+      onclick="closeModalOutside(event,'modal-weisheng')">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h2 class="modal-title" id="mw-title">偉勝乾燥工業</h2>
+          <button class="modal-close" onclick="closeModal('modal-weisheng')" aria-label="關閉視窗">
+            <svg width="18" height="18" fill="none" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+        <img class="modal-img" src="images/weisheng.png" alt="偉勝乾燥工業">
+        <div class="modal-body">
+          <p class="modal-ch">頻道名稱：偉勝乾燥技術視界</p>
+          <div class="modal-tags">
+            <span class="tag-chip">#就享知頻道</span>
+            <span class="tag-chip">#展會行銷</span>
+            <span class="tag-chip">#知識聚樂部</span>
+          </div>
+          <div class="modal-text">
+            <p>偉勝乾燥工業長期深耕光與熱製程設備，深知專業知識需要合適的傳遞方式。</p>
+            <p>就享知是專為B2B產業打造的知識平台，協助合作夥伴在各類專業展覽中曝光，並透過短影音製作、帶領知識聚樂部看展團深入認識偉勝等方式，為我們創造更多與市場對話的機會。</p>
+            <p>同時，就享知深度經營製造業高階客群，提升偉勝在專業人士之間的觸及與信任，讓我們的專業知識與產品更容易被理解與分享。這樣的合作，讓偉勝就像多了一位站在產業第一線的專業推薦者，為品牌建立更有信賴感的影響力。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 巨緯科技 -->
+    <div class="modal-overlay" id="modal-juwei" role="dialog" aria-modal="true" aria-labelledby="mj-title"
+      onclick="closeModalOutside(event,'modal-juwei')">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h2 class="modal-title" id="mj-title">巨緯科技</h2>
+          <button class="modal-close" onclick="closeModal('modal-juwei')" aria-label="關閉視窗">
+            <svg width="18" height="18" fill="none" stroke-width="2" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+        <img class="modal-img" src="images/juwei.png" alt="巨緯科技">
+        <div class="modal-body">
+          <p class="modal-ch">頻道名稱：老葉談自動化</p>
+          <div class="modal-tags">
+            <span class="tag-chip">#就享知頻道</span>
+            <span class="tag-chip">#展會行銷</span>
+            <span class="tag-chip">#產業講座</span>
+          </div>
+          <div class="modal-text">
+            <p>我們與就享知合作之後，最大的收穫，不只是多了一個內容發佈的平台，而是為巨緯建立了一條在品牌官網之外，能夠持續與潛在客戶對話的溫暖觸角。</p>
+            <p>作為一家專注於自動化與系統整合的公司，我們長期累積了大量來自現場的經驗與實務觀察，這些內容過去多半只存在於專案過程、內部文件或活動現場。透過就享知的平台與內容協作，我們能將這些一次性的活動、講座與交流，整理成文章與影片，讓原本只屬於當下的價值，成為可以被保存、被理解、被持續看見的內容資產。</p>
+            <p>這樣的轉化，讓巨緯不只是被看見，而是被慢慢認識、被建立信任。我們很感謝就享知團隊以夥伴的角色，陪我們一起整理、共創與累積這些內容，讓品牌經營不只是短期曝光，而是一步一步，為長期信任打下穩定而溫暖的基礎。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer" role="contentinfo">
+      <p>© 2025 鼎新數智 Digiwin｜就享知 DigiKnow — All Rights Reserved</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+      integrity="sha512-7Pi/otdlr84DghKBQrUVGYwfui7K8dpZbF7oHMKLh8aaY0NTQM+DXqdoXYI0M5hNxJuFLZCm8rUISDzYP9XRA=="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      /* ── Tier-1 tabs (線上 / 線下) ── */
+      function switchTier1(mode) {
+        document.getElementById('panel-online').hidden  = mode !== 'online';
+        document.getElementById('panel-offline').hidden = mode !== 'offline';
+
+        document.querySelectorAll('.srv-t1-btn').forEach(b => {
+          b.setAttribute('aria-selected', b.dataset.mode === mode ? 'true' : 'false');
+        });
+      }
+
+      /* ── Tier-2 tabs (detail panels) ── */
+      function switchDetail(panelId, targetId) {
+        /* If the target panel is currently hidden, switch tier-1 first */
+        const targetPanel = document.getElementById(panelId);
+        if (targetPanel.hidden) {
+          const mode = panelId === 'panel-online' ? 'online' : 'offline';
+          switchTier1(mode);
+        }
+
+        const panel = document.getElementById(panelId);
+
+        panel.querySelectorAll('.srv-t2-card[data-detail]').forEach(c => {
+          const active = c.dataset.detail === targetId;
+          c.setAttribute('aria-selected', active ? 'true' : 'false');
+          const tick = c.querySelector('.t2-tick');
+          if (tick) tick.style.display = active ? 'flex' : 'none';
+        });
+
+        panel.querySelectorAll('.srv-detail').forEach(d => {
+          d.classList.toggle('active', d.id === targetId);
+        });
+      }
+
+      /* ── Modals ── */
+      let lastFocus = null;
+
+      function openModal(id) {
+        lastFocus = document.activeElement;
+        const m = document.getElementById(id);
+        m.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+          const btn = m.querySelector('.modal-close');
+          if (btn) btn.focus();
+        }, 80);
+      }
+
+      function closeModal(id) {
+        document.getElementById(id).classList.remove('open');
+        document.body.style.overflow = '';
+        if (lastFocus) lastFocus.focus();
+      }
+
+      function closeModalOutside(e, id) {
+        if (e.target.classList.contains('modal-overlay')) closeModal(id);
+      }
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id));
+        }
+      });
+
+      /* ── Scroll reveal ── */
+      const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            revealObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+      /* ── Init active ticks ── */
+      document.querySelectorAll('.srv-t2-card[aria-selected="true"] .t2-tick').forEach(t => {
+        t.style.display = 'flex';
+      });
+
+      /* ── Hero carousel ── */
+      (() => {
+        const DURATION = 2000;   /* ms per slide */
+        const FADE     = 900;    /* ms fade transition (matches CSS) */
+
+        const slides   = document.querySelectorAll('#hero-carousel .hv-slide');
+        const dots     = document.querySelectorAll('#hero-carousel .hv-dot');
+        const progress = document.getElementById('hero-progress');
+
+        let current  = 0;
+        let timer    = null;
+        let progTimer = null;
+
+        function goTo(idx) {
+          /* deactivate old */
+          slides[current].classList.remove('is-active');
+          dots[current].classList.remove('is-active');
+          dots[current].setAttribute('aria-selected', 'false');
+
+          current = (idx + slides.length) % slides.length;
+
+          /* activate new */
+          slides[current].classList.add('is-active');
+          dots[current].classList.add('is-active');
+          dots[current].setAttribute('aria-selected', 'true');
+
+          /* reset progress bar */
+          if (progress) {
+            progress.style.transition = 'none';
+            progress.style.width = '0%';
+            /* force reflow */
+            progress.offsetWidth;
+            progress.style.transition = `width ${DURATION}ms linear`;
+            progress.style.width = '100%';
+          }
+        }
+
+        function startAuto() {
+          stopAuto();
+          timer = setInterval(() => goTo(current + 1), DURATION);
+        }
+
+        function stopAuto() {
+          clearInterval(timer);
+          clearTimeout(progTimer);
+        }
+
+        /* dot click */
+        dots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            goTo(i);
+            stopAuto();
+            /* resume after 6s of idle */
+            progTimer = setTimeout(startAuto, 6000);
+          });
+        });
+
+        /* pause on hover */
+        const carousel = document.getElementById('hero-carousel');
+        carousel.addEventListener('mouseenter', stopAuto);
+        carousel.addEventListener('mouseleave', startAuto);
+
+        /* kick off */
+        goTo(0);
+        startAuto();
+      })();
+    </script>
+  </body>
+</html>
