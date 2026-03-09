@@ -588,6 +588,7 @@
           background-size: 32px 32px;
           opacity: .65;
           pointer-events: none;
+          z-index: 3;
         }
 
         /* blobs */
@@ -596,6 +597,7 @@
           border-radius: 50%;
           filter: blur(72px);
           pointer-events: none;
+          z-index: 3;
 
           &.hb1 {
             width: 560px;
@@ -647,14 +649,13 @@
 
         }
 
-        /* ── hero image block ── */
+        /* ── hero image block (fullscreen) ── */
         & .hero-visual {
           position: absolute;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          width: 46%;
+          inset: 0;
+          width: 100%;
           overflow: hidden;
+          z-index: 0;
 
           & .hv-carousel {
             position: relative;
@@ -689,11 +690,20 @@
               }
             }
 
-            /* left fade blend into hero bg */
+            /* 左透明 → 右不透明遮罩：讓左側文字區清晰可讀 */
             &::before {
               content: '';
               position: absolute;
               inset: 0;
+              background: linear-gradient(
+                90deg,
+                var(--bg)                     0%,
+                rgba(240 247 255 / .96)       20%,
+                rgba(240 247 255 / .80)       36%,
+                rgba(240 247 255 / .40)       52%,
+                rgba(240 247 255 / .08)       68%,
+                transparent                  100%
+              );
               z-index: 2;
               pointer-events: none;
             }
@@ -702,8 +712,9 @@
             & .hv-dots {
               position: absolute;
               bottom: 24px;
-              left: 50%;
-              transform: translateX(-50%);
+              right: 32px;
+              left: auto;
+              transform: none;
               display: flex;
               gap: 8px;
               z-index: 4;
@@ -712,7 +723,7 @@
                 width: 8px;
                 height: 8px;
                 border-radius: 50%;
-                background: rgba(255 255 255 / .45);
+                background: rgba(255 255 255 / .50);
                 border: none;
                 cursor: pointer;
                 padding: 0;
@@ -2212,7 +2223,7 @@
         </div>
 
         <!-- content -->
-        <div class="mw w-100">
+        <div class="mw w-100" style="position:relative; z-index:10;">
           <div class="hero-content">
             <div class="hero-badge au">
               <div class="hb-dot"></div>
