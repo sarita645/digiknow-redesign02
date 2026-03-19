@@ -475,7 +475,7 @@
 
       /* ─── section padding ─── */
       .sec-pad {
-        padding-block: var(--sp-12);
+        padding-block: 64px;
       }
 
       /* ─────────────────────────────────────────────
@@ -698,10 +698,10 @@
               background: linear-gradient(
                 90deg,
                 var(--bg)                     0%,
-                rgba(240 247 255 / .96)       40%,
-                rgba(240 247 255 / .80)       56%,
-                rgba(240 247 255 / .40)       72%,
-                rgba(240 247 255 / .08)       88%,
+                rgba(240 247 255 / .96)       20%,
+                rgba(240 247 255 / .80)       36%,
+                rgba(240 247 255 / .40)       52%,
+                rgba(240 247 255 / .08)       68%,
                 transparent                  100%
               );
               z-index: 2;
@@ -1569,7 +1569,7 @@
 
           /* 圖片區塊：order 2（排到文字下方） */
           & .hero-visual {
-            /* order: 2; */
+            order: 2;
             position: relative;
             inset: auto;
             width: 100%;
@@ -1587,9 +1587,9 @@
                 background: linear-gradient(
                   180deg,
                   rgba(240 247 255 / .35)    0%,
-                  rgba(240 247 255 / .10)   40%,
-                  transparent               65%,
-                  rgba(240 247 255 / .25)   88%,
+                  rgba(240 247 255 / .10)   20%,
+                  transparent               45%,
+                  rgba(240 247 255 / .25)   78%,
                   var(--bg)                100%
                 );
               }
@@ -1670,7 +1670,7 @@
         background: var(--grad-dark);
         position: relative;
         overflow: hidden;
-        padding-block: var(--sp-12);
+        padding-block: 64px;
 
         &::before {
           content: '';
@@ -1713,7 +1713,7 @@
 
         & .proc-row {
           display: grid;
-          grid-template-columns: 1fr 80px 1fr;
+          grid-template-columns: 1fr 60px 1fr;
           min-height: 144px;
           align-items: center;
         }
@@ -1723,11 +1723,14 @@
           flex-direction: column;
           align-items: center;
           height: 100%;
+          width: 60px;
+          flex-shrink: 0;
         }
 
         & .proc-vline {
           flex: 1;
           width: 2px;
+          align-self: center;
           background: linear-gradient(180deg, rgba(59 130 246 / .5), rgba(37 99 235 / .2));
 
           &.inv { background: transparent; }
@@ -1845,6 +1848,69 @@
 
         & .proc-left { padding-right: var(--sp-3); }
         & .proc-right { padding-left: var(--sp-3); }
+      }
+
+      /* ── Process mobile < 576px：左右欄改 flex，垂直線隱藏 ── */
+      @media (max-width: 575.98px) {
+        .process-section {
+
+          & .proc-row {
+            grid-template-columns: 60px 1fr;
+            min-height: unset;
+            margin-bottom: var(--sp-2);
+          }
+
+          & .proc-left { display: none; }
+
+          & .proc-mid {
+            height: auto;
+            padding-top: 16px;
+
+            & .proc-vline { display: none; }
+          }
+
+          & .proc-right {
+            padding-left: var(--sp-2);
+
+            & .proc-card {
+              margin-block: 0;
+              margin-bottom: var(--sp-1);
+              padding: var(--sp-2) var(--sp-2);
+
+              & .pc-title { font-size: 15px; }
+              & .pc-desc  { font-size: 13px; }
+            }
+          }
+
+          /* card 在左欄的 step：左欄顯示 card，中欄圓圈 */
+          & .proc-row:has(.proc-left .proc-card) {
+            grid-template-columns: 60px 1fr;
+
+            & .proc-left {
+              display: block;
+              grid-column: 2;
+              grid-row: 1;
+              padding-right: 0;
+              padding-left: var(--sp-2);
+
+              & .proc-card {
+                margin-block: 0;
+                margin-bottom: var(--sp-1);
+                padding: var(--sp-2) var(--sp-2);
+
+                & .pc-title { font-size: 15px; }
+                & .pc-desc  { font-size: 13px; }
+              }
+            }
+
+            & .proc-mid {
+              grid-column: 1;
+              grid-row: 1;
+            }
+
+            & .proc-right { display: none; }
+          }
+        }
       }
 
       /* ─────────────────────────────────────────────
@@ -2334,23 +2400,23 @@
 
             <!-- Slide 1 -->
             <div class="hv-slide is-active">
-              <img src="images/banner-01.jpg" alt="就享知品牌形象 1" loading="eager">
+              <img src="images/01.png" alt="就享知品牌形象 1" loading="eager">
             </div>
             <!-- Slide 2 -->
             <div class="hv-slide">
-              <img src="images/banner-02.jpg" alt="就享知品牌形象 2" loading="lazy">
+              <img src="images/02.png" alt="就享知品牌形象 2" loading="lazy">
             </div>
             <!-- Slide 3 -->
             <div class="hv-slide">
-              <img src="images/banner-03.jpg" alt="就享知品牌形象 3" loading="lazy">
+              <img src="images/03.png" alt="就享知品牌形象 3" loading="lazy">
             </div>
             <!-- Slide 4 -->
             <div class="hv-slide">
-              <img src="images/banner-04.jpg" alt="就享知品牌形象 4" loading="lazy">
+              <img src="images/04.png" alt="就享知品牌形象 4" loading="lazy">
             </div>
             <!-- Slide 5 -->
             <div class="hv-slide">
-              <img src="images/banner-05.jpg" alt="就享知品牌形象 5" loading="lazy">
+              <img src="images/05.png" alt="就享知品牌形象 5" loading="lazy">
             </div>
 
             <!-- dot indicators -->
@@ -3129,130 +3195,44 @@
                   <div class="pc-tag">Step 01</div>
                   <h3 class="pc-title">預約填寫</h3>
                   <p class="pc-desc">填寫顧問諮詢服務表單，告訴我們你的品牌現況與需求。</p>
-                  <!-- <div class="pc-chips"><span class="pc-chip">顧問諮詢表單</span></div> -->
                 </div>
               </div>
             </div>
 
             <!-- Step 2 — card left -->
-            <!-- <div class="proc-row">
-              <div class="proc-left">
-                <div class="proc-card">
-                  <div class="pc-tag">Step 02</div>
-                  <h3 class="pc-title">聯繫拜訪</h3>
-                  <p class="pc-desc">專人與貴公司聯繫，約立拜訪時間，了解更多背景資訊。</p>
-                  <div class="pc-chips">
-                    <span class="pc-chip">專人聯繫</span>
-                    <span class="pc-chip">約立拜訪時間</span>
-                  </div>
-                </div>
-              </div>
-              <div class="proc-mid" aria-hidden="true">
-                <div class="proc-vline"></div>
-                <div class="proc-circle">
-                  <span class="proc-num">02</span>
-                  <svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
-                </div>
-                <div class="proc-vline"></div>
-              </div>
-              <div class="proc-right"></div>
-            </div> -->
-
-            <!-- Step 3 — card right -->
-            <!-- <div class="proc-row">
-              <div class="proc-left"></div>
-              <div class="proc-mid" aria-hidden="true">
-                <div class="proc-vline"></div>
-                <div class="proc-circle">
-                  <span class="proc-num">03</span>
-                  <svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-                </div>
-                <div class="proc-vline"></div>
-              </div>
-              <div class="proc-right">
-                <div class="proc-card">
-                  <div class="pc-tag">Step 03</div>
-                  <h3 class="pc-title">專人拜訪</h3>
-                  <p class="pc-desc">了解貴公司產品、預算，概覽本公司服務範圍，進行深度溝通。</p>
-                  <div class="pc-chips">
-                    <span class="pc-chip">了解產品與預算</span>
-                    <span class="pc-chip">服務範圍說明</span>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-
-            <!-- Step 4 — card left -->
             <div class="proc-row">
               <div class="proc-left">
                 <div class="proc-card">
                   <div class="pc-tag">Step 02</div>
                   <h3 class="pc-title">聯繫拜訪</h3>
                   <p class="pc-desc">專人與貴公司聯繫 <br>約立拜訪時間</p>
-                  <!-- <div class="pc-chips">
-                    <span class="pc-chip">方案組合</span>
-                    <span class="pc-chip">執行時程</span>
-                  </div> -->
                 </div>
               </div>
               <div class="proc-mid" aria-hidden="true">
                 <div class="proc-vline"></div>
                 <div class="proc-circle">
                   <span class="proc-num">02</span>
-                  <!-- <svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> -->
-
                 </div>
                 <div class="proc-vline"></div>
               </div>
               <div class="proc-right"></div>
             </div>
 
-            <!-- Step 5 — card right -->
-            <!-- <div class="proc-row">
-              <div class="proc-left"></div>
-              <div class="proc-mid" aria-hidden="true">
-                <div class="proc-vline"></div>
-                <div class="proc-circle">
-                  <span class="proc-num">05</span>
-                  <svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                </div>
-                <div class="proc-vline"></div>
-              </div>
-              <div class="proc-right">
-                <div class="proc-card">
-                  <div class="pc-tag">Step 05</div>
-                  <h3 class="pc-title">合約簽定</h3>
-                  <p class="pc-desc">確認方案、報價及提案，簽訂合約，正式展開合作關係。</p>
-                  <div class="pc-chips">
-                    <span class="pc-chip">確認報價</span>
-                    <span class="pc-chip">簽訂合約</span>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-
-            <!-- Step 6 — card left, final -->
+            <!-- Step 3 — card right, final -->
             <div class="proc-row">
-              <div class="proc-left">
-
-              </div>
+              <div class="proc-left"></div>
               <div class="proc-mid" aria-hidden="true">
                 <div class="proc-vline"></div>
                 <div class="proc-circle final">
                   <span class="proc-num">03</span>
-                  <!-- <svg width="20" height="20" fill="none" stroke-width="1.5" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> -->
                 </div>
                 <div class="proc-vline inv"></div>
               </div>
               <div class="proc-right">
-                                <div class="proc-card final-card">
+                <div class="proc-card final-card">
                   <div class="pc-tag final-tag">Step 03</div>
                   <h3 class="pc-title">合作提案</h3>
                   <p class="pc-desc">提供專業方案組合 <br>執行內容及時程提案 <br>確認報價與簽訂合約</p>
-                  <!-- <div class="pc-chips">
-                    <span class="pc-chip final">提案修改</span>
-                    <span class="pc-chip final">依時程執行</span>
-                  </div> -->
                 </div>
               </div>
             </div>
