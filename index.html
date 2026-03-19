@@ -698,10 +698,10 @@
               background: linear-gradient(
                 90deg,
                 var(--bg)                     0%,
-                rgba(240 247 255 / .96)       20%,
-                rgba(240 247 255 / .80)       36%,
-                rgba(240 247 255 / .40)       52%,
-                rgba(240 247 255 / .08)       68%,
+                rgba(240 247 255 / .96)       40%,
+                rgba(240 247 255 / .80)       66%,
+                rgba(240 247 255 / .40)       72%,
+                rgba(240 247 255 / .08)       88%,
                 transparent                  100%
               );
               z-index: 2;
@@ -1040,6 +1040,7 @@
           box-shadow: var(--sh-sm);
           overflow: hidden;
           cursor: pointer;
+          height: 100%;
           transition: box-shadow .2s, transform .2s, border-color .2s;
 
           &:hover {
@@ -1764,6 +1765,11 @@
 
           & svg { stroke: #60A5FA; }
 
+          & .material-symbols-outlined {
+            color: #60A5FA;
+            font-size: 22px;
+          }
+
           &:hover {
             border-color: #60A5FA;
             box-shadow: 0 0 36px rgba(59 130 246 / .45);
@@ -2411,23 +2417,23 @@
 
             <!-- Slide 1 -->
             <div class="hv-slide is-active">
-              <img src="images/01.png" alt="就享知品牌形象 1" loading="eager">
+              <img src="images/banner-01.jpg" alt="就享知品牌形象 1" loading="eager">
             </div>
             <!-- Slide 2 -->
             <div class="hv-slide">
-              <img src="images/02.png" alt="就享知品牌形象 2" loading="lazy">
+              <img src="images/banner-02.jpg" alt="就享知品牌形象 2" loading="lazy">
             </div>
             <!-- Slide 3 -->
             <div class="hv-slide">
-              <img src="images/03.png" alt="就享知品牌形象 3" loading="lazy">
+              <img src="images/banner-03.jpg" alt="就享知品牌形象 3" loading="lazy">
             </div>
             <!-- Slide 4 -->
             <div class="hv-slide">
-              <img src="images/04.png" alt="就享知品牌形象 4" loading="lazy">
+              <img src="images/banner-04.jpg" alt="就享知品牌形象 4" loading="lazy">
             </div>
             <!-- Slide 5 -->
             <div class="hv-slide">
-              <img src="images/05.png" alt="就享知品牌形象 5" loading="lazy">
+              <img src="images/banner-05.jpg" alt="就享知品牌形象 5" loading="lazy">
             </div>
 
             <!-- dot indicators -->
@@ -3223,6 +3229,9 @@
                 <div class="proc-vline"></div>
                 <div class="proc-circle">
                   <span class="proc-num">02</span>
+<span class="material-symbols-outlined">
+phone_enabled
+</span>
                 </div>
                 <div class="proc-vline"></div>
               </div>
@@ -3236,6 +3245,9 @@
                 <div class="proc-vline"></div>
                 <div class="proc-circle final">
                   <span class="proc-num">03</span>
+<span class="material-symbols-outlined">
+handshake
+</span>
                 </div>
                 <div class="proc-vline inv"></div>
               </div>
@@ -3573,10 +3585,16 @@
       </div>
     </div>
 
+    
     <!-- FOOTER -->
     <footer class="site-footer" role="contentinfo">
       <p>© 2025 鼎新數智 Digiwin｜就享知 DigiKnow — All Rights Reserved</p>
     </footer>
+
+
+<!-- google icon -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
 
     <!-- Bootstrap JS -->
     <script
