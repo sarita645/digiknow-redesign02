@@ -5,19 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>就享知 DigiKnow｜打開品牌影響力，從專屬頻道開始</title>
 
-    <!-- Bootstrap 5.3 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
-      integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
-      crossorigin="anonymous"
-    >
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Barlow:wght@600;700;800;900&display=swap"
-      rel="stylesheet"
-    >
+    <!-- Material Symbols：只載入實際用到的 3 個 icon -->
+    <link rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=edit_note,handshake,phone_enabled&display=block"
+      onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=edit_note,handshake,phone_enabled&display=block">
+    </noscript>
+
+    <!-- Bootstrap 精簡版：只內聯實際用到的 utilities，移除 31KB 外部 CSS -->
+    <style>
+      /* Bootstrap utilities subset — only used classes */
+      .row{--bs-gutter-x:1.5rem;--bs-gutter-y:0;display:flex;flex-wrap:wrap;margin-top:calc(-1*var(--bs-gutter-y));margin-right:calc(-.5*var(--bs-gutter-x));margin-left:calc(-.5*var(--bs-gutter-x))}
+      .row>*{flex-shrink:0;width:100%;max-width:100%;padding-right:calc(var(--bs-gutter-x)*.5);padding-left:calc(var(--bs-gutter-x)*.5);margin-top:var(--bs-gutter-y)}
+      .g-3,.gx-3{--bs-gutter-x:1rem}.g-3,.gy-3{--bs-gutter-y:1rem}
+      .col-6{width:50%}.col-12{width:100%}
+      .h-100{height:100%!important}.w-100{width:100%!important}
+      .d-none{display:none!important}.d-flex{display:flex!important}
+      .flex-wrap{flex-wrap:wrap!important}.flex-shrink-0{flex-shrink:0!important}
+      .gap-3{gap:1rem!important}
+      .mb-2{margin-bottom:.5rem!important}.mb-3{margin-bottom:1rem!important}
+      .mb-4{margin-bottom:1.5rem!important}.mb-5{margin-bottom:3rem!important}
+      @media(min-width:768px){.col-md-3{width:25%}.col-md-4{width:33.333%}.col-md-6{width:50%}.d-md-inline-flex{display:inline-flex!important}}
+      @media(min-width:992px){.d-lg-flex{display:flex!important}}
+    </style>
 
     <style>
       /* ─────────────────────────────────────────────
@@ -68,9 +80,9 @@
         --sh-lg:  0 12px 48px rgba(20 70 232 / .16);
         --sh-btn: 0 4px 20px  rgba(20 70 232 / .32);
 
-        /* typography */
-        --font-en: 'Barlow', sans-serif;
-        --font-zh: 'Noto Sans TC', sans-serif;
+        /* typography — 系統字體，無需外部載入 */
+        --font-en: 'Barlow', ui-sans-serif, system-ui, -apple-system, sans-serif;
+        --font-zh: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Heiti TC', sans-serif;
 
         /* radius */
         --r: 12px;
@@ -1144,8 +1156,7 @@
           padding: 6px;
           width: fit-content;
           margin-bottom: var(--sp-6);
-          backdrop-filter: blur(8px);
-
+  
           & .srv-t1-btn {
             display: flex;
             align-items: center;
@@ -1806,7 +1817,6 @@
           padding: var(--sp-3) var(--sp-4);
           margin-block: 12px;
           transition: all .25s;
-          backdrop-filter: blur(4px);
 
           &:hover {
             background: rgba(255 255 255 / .09);
@@ -1993,8 +2003,7 @@
           border: 1px solid rgba(99 155 255 / .18);
           border-radius: 20px;
           overflow: hidden;
-          backdrop-filter: blur(8px);
-        }
+          }
 
         /* header stripe */
         & .cf-head {
@@ -2343,12 +2352,12 @@
         to   { opacity: 1; transform: scale(1)   translateY(0);    }
       }
       @keyframes aup {
-        from { opacity: 0; transform: translateY(24px); }
-        to   { opacity: 1; transform: translateY(0);    }
+        from { transform: translateY(20px); }
+        to   { transform: translateY(0);    }
       }
 
-      /* stagger hero content */
-      .au { opacity: 0; transform: translateY(24px); animation: aup .7s ease forwards; }
+      /* .au：SEO 可見（opacity:1），只做位移動畫 */
+      .au { opacity: 1; transform: translateY(20px); animation: aup .7s ease forwards; }
       .au:nth-child(1) { animation-delay: .08s; }
       .au:nth-child(2) { animation-delay: .16s; }
       .au:nth-child(3) { animation-delay: .24s; }
@@ -2357,12 +2366,21 @@
       .au:nth-child(6) { animation-delay: .48s; }
 
       /* scroll reveal */
+      /* .reveal：預設可見（SEO 爬蟲可讀），JS 加上 visible class 後才做動畫 */
       .reveal {
-        opacity: 0;
-        transform: translateY(24px);
+        opacity: 1;
+        transform: none;
         transition: opacity .6s ease, transform .6s ease;
+      }
 
-        &.visible {
+      /* 只有在支援 JS 且使用者沒有禁用動畫時才套用初始隱藏狀態 */
+      @media (prefers-reduced-motion: no-preference) {
+        .js-ready .reveal {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+
+        .js-ready .reveal.visible {
           opacity: 1;
           transform: translateY(0);
         }
@@ -2417,23 +2435,25 @@
 
             <!-- Slide 1 -->
             <div class="hv-slide is-active">
-              <img src="images/banner-01.jpg" alt="就享知品牌形象 1" loading="eager">
+              <img src="images/banner-01.jpg" alt="就享知品牌形象 1"
+                loading="eager" fetchpriority="high" decoding="sync"
+                width="1200" height="800">
             </div>
             <!-- Slide 2 -->
             <div class="hv-slide">
-              <img src="images/banner-02.jpg" alt="就享知品牌形象 2" loading="lazy">
+              <img src="images/banner-02.jpg" alt="就享知品牌形象 2" loading="lazy" decoding="async" width="1200" height="800">
             </div>
             <!-- Slide 3 -->
             <div class="hv-slide">
-              <img src="images/banner-03.jpg" alt="就享知品牌形象 3" loading="lazy">
+              <img src="images/banner-03.jpg" alt="就享知品牌形象 3" loading="lazy" decoding="async" width="1200" height="800">
             </div>
             <!-- Slide 4 -->
             <div class="hv-slide">
-              <img src="images/banner-04.jpg" alt="就享知品牌形象 4" loading="lazy">
+              <img src="images/banner-04.jpg" alt="就享知品牌形象 4" loading="lazy" decoding="async" width="1200" height="800">
             </div>
             <!-- Slide 5 -->
             <div class="hv-slide">
-              <img src="images/banner-05.jpg" alt="就享知品牌形象 5" loading="lazy">
+              <img src="images/banner-05.jpg" alt="就享知品牌形象 5" loading="lazy" decoding="async" width="1200" height="800">
             </div>
 
             <!-- dot indicators -->
@@ -2466,7 +2486,7 @@
             <div class="hero-logo-row au">
               <!-- <span class="hl-en">DigiKnow</span>
               <span class="hl-zh">就享知</span> -->
-              <img src="images/digiknow_logo.svg" alt="就享知LOGO">
+              <img src="images/digiknow_logo.svg" alt="就享知LOGO" width="180" height="40">
             </div>
 
             <h1 id="hero-heading" class="hero-h1 au">
@@ -2546,8 +2566,7 @@
                 <div class="ccf-img">
                   <img
                     src="images/penteng.png"
-                    alt="奔騰物流系統" loading="lazy"
-                  >
+                    alt="奔騰物流系統" loading="lazy" decoding="async" width="800" height="533">
                 </div>
                 <div class="ccf-body">
                   <div class="ccf-tags">
@@ -2576,8 +2595,7 @@
                 <div class="ccf-img">
                   <img
                     src="images/ganfuzi.png"
-                    alt="甘夫子" loading="lazy"
-                  >
+                    alt="甘夫子" loading="lazy" decoding="async" width="800" height="533">
                 </div>
                 <div class="ccf-body">
                   <div class="ccf-tags">
@@ -2612,7 +2630,7 @@
                 onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-henglong')"
               >
                 <div class="csm-img">
-                  <img src="images/henglong.png" alt="恆隆科技" loading="lazy">
+                  <img src="images/henglong.png" alt="恆隆科技" loading="lazy" decoding="async" width="400" height="300">
                 </div>
                 <div class="csm-body">
                   <h3 class="csm-name">恆隆科技</h3>
@@ -2646,7 +2664,7 @@
                 onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-xinjing')"
               >
                 <div class="csm-img">
-                  <img src="images/xinjing.png" alt="新晶科技" loading="lazy">
+                  <img src="images/xinjing.png" alt="新晶科技" loading="lazy" decoding="async" width="400" height="300">
                 </div>
                 <div class="csm-body">
                   <h3 class="csm-name">新晶科技</h3>
@@ -2680,7 +2698,7 @@
                 onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-weisheng')"
               >
                 <div class="csm-img">
-                  <img src="images/weisheng.png" alt="偉勝乾燥工業" loading="lazy">
+                  <img src="images/weisheng.png" alt="偉勝乾燥工業" loading="lazy" decoding="async" width="400" height="300">
                 </div>
                 <div class="csm-body">
                   <h3 class="csm-name">偉勝乾燥工業</h3>
@@ -2714,7 +2732,7 @@
                 onkeydown="if(event.key==='Enter'||event.key===' ')openModal('modal-juwei')"
               >
                 <div class="csm-img">
-                  <img src="images/juwei.png" alt="巨緯科技" loading="lazy">
+                  <img src="images/juwei.png" alt="巨緯科技" loading="lazy" decoding="async" width="400" height="300">
                 </div>
                 <div class="csm-body">
                   <h3 class="csm-name">巨緯科技</h3>
@@ -2742,7 +2760,7 @@
             <!-- no-modal 4 -->
             <div class="col-6 col-md-3">
               <article class="case-card-sm reveal">
-                <div class="csm-img"><img src="images/quansheng.png" alt="銓盛電子" loading="lazy"></div>
+                <div class="csm-img"><img src="images/quansheng.png" alt="銓盛電子" loading="lazy" decoding="async" width="400" height="300"></div>
                 <div class="csm-body">
                   <h3 class="csm-name">銓盛電子</h3>
                   <div class="csm-tags">
@@ -2756,7 +2774,7 @@
 
             <div class="col-6 col-md-3">
               <article class="case-card-sm reveal">
-                <div class="csm-img"><img src="images/ctbc.jpg" alt="中國信託商業銀行" loading="lazy"></div>
+                <div class="csm-img"><img src="images/ctbc.jpg" alt="中國信託商業銀行" loading="lazy" decoding="async" width="400" height="300"></div>
                 <div class="csm-body">
                   <h3 class="csm-name">中國信託商業銀行</h3>
                   <div class="csm-tags"><span class="tag-chip">#研討會</span></div>
@@ -2766,7 +2784,7 @@
 
             <div class="col-6 col-md-3">
               <article class="case-card-sm reveal">
-                <div class="csm-img"><img src="images/iscoollab.png" alt="伊斯酷軟體科技" loading="lazy"></div>
+                <div class="csm-img"><img src="images/iscoollab.png" alt="伊斯酷軟體科技" loading="lazy" decoding="async" width="400" height="300"></div>
                 <div class="csm-body">
                   <h3 class="csm-name">伊斯酷軟體科技</h3>
                   <div class="csm-tags">
@@ -2779,7 +2797,7 @@
 
             <div class="col-6 col-md-3">
               <article class="case-card-sm reveal">
-                <div class="csm-img"><img src="images/sinopac.png" alt="永豐銀行" loading="lazy"></div>
+                <div class="csm-img"><img src="images/sinopac.png" alt="永豐銀行" loading="lazy" decoding="async" width="400" height="300"></div>
                 <div class="csm-body">
                   <h3 class="csm-name">永豐銀行</h3>
                   <div class="csm-tags">
@@ -3480,7 +3498,7 @@ handshake
             </svg>
           </button>
         </div>
-        <img class="modal-img" src="images/henglong.png" alt="恆隆科技">
+        <img class="modal-img" src="images/henglong.png" alt="恆隆科技" width="400" height="300">
         <div class="modal-body">
           <p class="modal-ch">頻道名稱：嗶嗶RFID-恆隆科技</p>
           <div class="modal-tags">
@@ -3510,7 +3528,7 @@ handshake
             </svg>
           </button>
         </div>
-        <img class="modal-img" src="images/xinjing.png" alt="新晶科技">
+        <img class="modal-img" src="images/xinjing.png" alt="新晶科技" width="400" height="300">
         <div class="modal-body">
           <p class="modal-ch">頻道名稱：安全365</p>
           <div class="modal-tags">
@@ -3539,7 +3557,7 @@ handshake
             </svg>
           </button>
         </div>
-        <img class="modal-img" src="images/weisheng.png" alt="偉勝乾燥工業">
+        <img class="modal-img" src="images/weisheng.png" alt="偉勝乾燥工業" width="400" height="300">
         <div class="modal-body">
           <p class="modal-ch">頻道名稱：偉勝乾燥技術視界</p>
           <div class="modal-tags">
@@ -3568,7 +3586,7 @@ handshake
             </svg>
           </button>
         </div>
-        <img class="modal-img" src="images/juwei.png" alt="巨緯科技">
+        <img class="modal-img" src="images/juwei.png" alt="巨緯科技" width="400" height="300">
         <div class="modal-body">
           <p class="modal-ch">頻道名稱：老葉談自動化</p>
           <div class="modal-tags">
@@ -3592,18 +3610,10 @@ handshake
     </footer>
 
 
-<!-- google icon -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-
-
-    <!-- Bootstrap JS -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
-      integrity="sha512-7Pi/otdlr84DghKBQrUVGYwfui7K8dpZbF7oHMKLh8aaY0NTQM+DXqdoXYI0M5hNxJuFLZCm8rUISDzYP9XRA=="
-      crossorigin="anonymous"
-    ></script>
-
     <script>
+      /* 標記 JS 已載入，啟用 reveal 動畫（SEO 爬蟲不會執行 JS，所以看到的是可見內容） */
+      document.documentElement.classList.add('js-ready');
+
       /* ── Tier-1 tabs (線上 / 線下) ── */
       function switchTier1(mode) {
         document.getElementById('panel-online').hidden  = mode !== 'online';
